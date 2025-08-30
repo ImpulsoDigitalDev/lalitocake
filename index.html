@@ -141,8 +141,7 @@
         <div class="carousel-container">
             <div class="carousel-track" id="carouselTrack">
                 <div class="carousel-slide hero-gradient relative" id="slide-1">
-                    <input type="file" id="upload-slide1" accept="image/*" class="hidden" onchange="uploadCarouselImage('slide-1', this)">
-                    <button onclick="triggerCarouselUpload('slide-1')" class="upload-btn absolute top-4 right-4 bg-blue-500 text-white p-2 rounded-full text-sm hidden">📷 Cambiar Fondo</button>
+                    <button onclick="triggerCarouselUpload('slide-1')" class="upload-btn absolute top-4 right-4 bg-blue-500 text-white p-2 rounded-full text-sm hidden">🔄 Cambiar Imagen</button>
                     <div class="text-center text-white px-4">
                         <h2 class="font-dancing text-6xl md:text-8xl font-bold mb-4 text-shadow editable" onclick="makeEditable(this)">Lalito Cake</h2>
                         <p class="text-xl md:text-2xl mb-8 text-shadow editable" onclick="makeEditable(this)">Pasteles artesanales que endulzan tu vida</p>
@@ -152,16 +151,14 @@
                     </div>
                 </div>
                 <div class="carousel-slide relative" id="slide-2" style="background: linear-gradient(rgba(139,69,19,0.7), rgba(139,69,19,0.7)), url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 400%22><rect fill=%22%23D2691E%22 width=%221200%22 height=%22400%22/><circle fill=%22%238B4513%22 cx=%22200%22 cy=%22200%22 r=%2280%22/><circle fill=%22%23CD853F%22 cx=%22600%22 cy=%22150%22 r=%2260%22/><circle fill=%22%23A0522D%22 cx=%221000%22 cy=%22250%22 r=%2270%22/></svg>');">
-                    <input type="file" id="upload-slide2" accept="image/*" class="hidden" onchange="uploadCarouselImage('slide-2', this)">
-                    <button onclick="triggerCarouselUpload('slide-2')" class="upload-btn absolute top-4 right-4 bg-blue-500 text-white p-2 rounded-full text-sm hidden">📷 Cambiar Fondo</button>
+                    <button onclick="triggerCarouselUpload('slide-2')" class="upload-btn absolute top-4 right-4 bg-blue-500 text-white p-2 rounded-full text-sm hidden">🔄 Cambiar Imagen</button>
                     <div class="text-center text-white px-4">
                         <h3 class="font-dancing text-5xl font-bold mb-4 text-shadow editable" onclick="makeEditable(this)">Sabores Únicos</h3>
                         <p class="text-xl mb-6 text-shadow editable" onclick="makeEditable(this)">Desde Oreo hasta Chocoflan, cada bocado es una experiencia</p>
                     </div>
                 </div>
                 <div class="carousel-slide relative" id="slide-3" style="background: linear-gradient(rgba(205,133,63,0.8), rgba(160,82,45,0.8)), url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 400%22><rect fill=%22%23CD853F%22 width=%221200%22 height=%22400%22/><rect fill=%22%238B4513%22 x=%22100%22 y=%22100%22 width=%22200%22 height=%22200%22 rx=%2220%22/><rect fill=%22%23A0522D%22 x=%22500%22 y=%2250%22 width=%22200%22 height=%22300%22 rx=%2220%22/><rect fill=%22%23D2691E%22 x=%22900%22 y=%22120%22 width=%22200%22 height=%22160%22 rx=%2220%22/></svg>');">
-                    <input type="file" id="upload-slide3" accept="image/*" class="hidden" onchange="uploadCarouselImage('slide-3', this)">
-                    <button onclick="triggerCarouselUpload('slide-3')" class="upload-btn absolute top-4 right-4 bg-blue-500 text-white p-2 rounded-full text-sm hidden">📷 Cambiar Fondo</button>
+                    <button onclick="triggerCarouselUpload('slide-3')" class="upload-btn absolute top-4 right-4 bg-blue-500 text-white p-2 rounded-full text-sm hidden">🔄 Cambiar Imagen</button>
                     <div class="text-center text-white px-4">
                         <h3 class="font-dancing text-5xl font-bold mb-4 text-shadow editable" onclick="makeEditable(this)">Pedidos Especiales</h3>
                         <p class="text-xl mb-6 text-shadow editable" onclick="makeEditable(this)">Creamos el pastel perfecto para tu ocasión especial</p>
@@ -203,11 +200,10 @@
                 <div class="cake-card rounded-2xl p-6 text-center relative" id="card-oreo">
                     <div class="image-container relative">
                         <div class="text-6xl mb-4" id="oreo-image">🍪</div>
-                        <input type="file" id="upload-oreo" accept="image/*" class="hidden" onchange="uploadImage('oreo', this)">
-                        <button onclick="triggerUpload('oreo')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">📷</button>
+                        <button onclick="triggerUpload('oreo')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">🔄</button>
                     </div>
                     <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Oreo</h3>
-                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Delicioso pastel con Oreo triturado y crema suave</p>
+                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Delicioso pastel con galletas Oreo trituradas y crema suave</p>
                     <button onclick="orderFlavor('Oreo')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
                         Pedir Ahora
                     </button>
@@ -217,8 +213,7 @@
                 <div class="cake-card rounded-2xl p-6 text-center relative" id="card-nutella">
                     <div class="image-container relative">
                         <div class="text-6xl mb-4" id="nutella-image">🍫</div>
-                        <input type="file" id="upload-nutella" accept="image/*" class="hidden" onchange="uploadImage('nutella', this)">
-                        <button onclick="triggerUpload('nutella')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">📷</button>
+                        <button onclick="triggerUpload('nutella')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">🔄</button>
                     </div>
                     <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Nutella</h3>
                     <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Irresistible combinación de chocolate y avellanas</p>
@@ -231,8 +226,7 @@
                 <div class="cake-card rounded-2xl p-6 text-center relative" id="card-3leches">
                     <div class="image-container relative">
                         <div class="text-6xl mb-4" id="3leches-image">🥛</div>
-                        <input type="file" id="upload-3leches" accept="image/*" class="hidden" onchange="uploadImage('3leches', this)">
-                        <button onclick="triggerUpload('3leches')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">📷</button>
+                        <button onclick="triggerUpload('3leches')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">🔄</button>
                     </div>
                     <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">3 Leches</h3>
                     <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Clásico pastel empapado en tres tipos de leche</p>
@@ -245,8 +239,7 @@
                 <div class="cake-card rounded-2xl p-6 text-center relative" id="card-napolitana">
                     <div class="image-container relative">
                         <div class="text-6xl mb-4" id="napolitana-image">🍓</div>
-                        <input type="file" id="upload-napolitana" accept="image/*" class="hidden" onchange="uploadImage('napolitana', this)">
-                        <button onclick="triggerUpload('napolitana')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">📷</button>
+                        <button onclick="triggerUpload('napolitana')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">🔄</button>
                     </div>
                     <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Napolitana</h3>
                     <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Tres sabores en uno: vainilla, chocolate y fresa</p>
@@ -259,8 +252,7 @@
                 <div class="cake-card rounded-2xl p-6 text-center relative" id="card-chocoflan">
                     <div class="image-container relative">
                         <div class="text-6xl mb-4" id="chocoflan-image">🍮</div>
-                        <input type="file" id="upload-chocoflan" accept="image/*" class="hidden" onchange="uploadImage('chocoflan', this)">
-                        <button onclick="triggerUpload('chocoflan')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">📷</button>
+                        <button onclick="triggerUpload('chocoflan')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">🔄</button>
                     </div>
                     <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Chocoflan</h3>
                     <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Perfecta fusión de pastel de chocolate y flan</p>
@@ -273,8 +265,7 @@
                 <div class="cake-card rounded-2xl p-6 text-center relative" id="card-pina">
                     <div class="image-container relative">
                         <div class="text-6xl mb-4" id="pina-image">🍍</div>
-                        <input type="file" id="upload-pina" accept="image/*" class="hidden" onchange="uploadImage('pina', this)">
-                        <button onclick="triggerUpload('pina')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">📷</button>
+                        <button onclick="triggerUpload('pina')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">🔄</button>
                     </div>
                     <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Piña</h3>
                     <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Refrescante pastel con trozos de piña natural</p>
@@ -287,8 +278,7 @@
                 <div class="cake-card rounded-2xl p-6 text-center relative" id="card-arequipe">
                     <div class="image-container relative">
                         <div class="text-6xl mb-4" id="arequipe-image">🍯</div>
-                        <input type="file" id="upload-arequipe" accept="image/*" class="hidden" onchange="uploadImage('arequipe', this)">
-                        <button onclick="triggerUpload('arequipe')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">📷</button>
+                        <button onclick="triggerUpload('arequipe')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">🔄</button>
                     </div>
                     <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Arequipe</h3>
                     <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Dulce de leche cremoso que derrite el corazón</p>
@@ -404,7 +394,7 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-amber-900">Ubicación</h3>
-                                <p class="text-amber-700 editable" onclick="makeEditable(this)">Tucupita-Venezuela</p>
+                                <p class="text-amber-700 editable" onclick="makeEditable(this)">Venezuela</p>
                             </div>
                         </div>
                         
@@ -480,7 +470,7 @@
                 <div class="text-center">
                     <p class="text-amber-200 text-sm editable" onclick="makeEditable(this)">Síguenos en nuestras redes sociales</p>
                 </div>
-                <p class="text-amber-200 text-sm mt-6 editable" onclick="makeEditable(this)">&copy; 2025 Lalito Cake. Diseñado por: LEONOVA STUDIO</p>
+                <p class="text-amber-200 text-sm mt-6 editable" onclick="makeEditable(this)">&copy; 2025 Lalito Cake. Designed by: LEONOVA STUDIO</p>
             </div>
         </div>
     </footer>
@@ -518,13 +508,13 @@
     <!-- Panel de Admin -->
     <div id="adminPanel" class="fixed top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-30 backdrop-blur-sm rounded-2xl p-3 z-40 hidden">
         <div class="flex flex-col space-y-3">
-            <!-- Botón Subir Imágenes -->
+            <!-- Botón Cambiar Imágenes -->
             <div class="relative group">
                 <button onclick="enableImageUpload()" class="w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center">
-                    📷
+                    🔄
                 </button>
                 <div class="absolute right-14 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    Subir Imágenes
+                    Cambiar Imágenes
                     <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
                 </div>
             </div>
@@ -622,6 +612,154 @@
         let isAdminMode = false;
         let chatMessages = [];
         
+        // Sistema de imágenes permanentes
+        const imageDatabase = {
+            // Imágenes de sabores (coloca aquí las URLs de tus imágenes reales)
+            flavors: {
+                oreo: [
+                    '🍪', // Emoji por defecto
+                    'images/oreo.jpg',
+                ],
+                nutella: [
+                    '🍫',
+                    'images/nutella.jpg',
+                ],
+                '3leches': [
+                    '🥛',
+                    'images/3leche.jpg',
+                ],
+                napolitana: [
+                    '🍓',
+                    'images/napolitana.jpg',
+                ],
+                chocoflan: [
+                    '🍮',
+                    'images/chocoflan.jpg',
+                ],
+                pina: [
+                    '🍍',
+                    'images/pina.jpg',
+                ],
+                arequipe: [
+                    '🍯',
+                    'images/arequipe.jpg',
+                ]
+            },
+            // Imágenes del carrusel
+            carousel: [
+                'hero-gradient', // Gradiente por defecto
+                'images/carousel-slide1.jpg',
+                'images/carousel-slide2.jpg',
+                'images/carousel-slide3.jpg',
+                'images/carousel-slide4.jpg'
+            ]
+        };
+        
+        // Índices actuales de imágenes (se guardan en localStorage)
+        let currentImageIndexes = JSON.parse(localStorage.getItem('lalitoCakeImages')) || {
+            oreo: 0, nutella: 0, '3leches': 0, napolitana: 0, 
+            chocoflan: 0, pina: 0, arequipe: 0,
+            'slide-1': 0, 'slide-2': 0, 'slide-3': 0
+        };
+        
+        function saveImageIndexes() {
+            localStorage.setItem('lalitoCakeImages', JSON.stringify(currentImageIndexes));
+        }
+        
+        function loadSavedImages() {
+            // Cargar imágenes de sabores
+            Object.keys(imageDatabase.flavors).forEach(flavor => {
+                const index = currentImageIndexes[flavor] || 0;
+                setFlavorImage(flavor, index);
+            });
+            
+            // Cargar imágenes del carrusel
+            ['slide-1', 'slide-2', 'slide-3'].forEach(slide => {
+                const index = currentImageIndexes[slide] || 0;
+                setCarouselImage(slide, index);
+            });
+        }
+        
+        function setFlavorImage(flavor, imageIndex) {
+            const imageElement = document.getElementById(`${flavor}-image`);
+            const images = imageDatabase.flavors[flavor];
+            
+            if (imageIndex === 0 || !images[imageIndex]) {
+                // Mostrar emoji
+                imageElement.innerHTML = images[0];
+                imageElement.style.backgroundImage = '';
+                imageElement.style.width = '';
+                imageElement.style.height = '';
+                imageElement.style.borderRadius = '';
+                imageElement.style.display = '';
+            } else {
+                // Mostrar imagen real
+                imageElement.innerHTML = '';
+                imageElement.style.backgroundImage = `url(${images[imageIndex]})`;
+                imageElement.style.backgroundSize = 'cover';
+                imageElement.style.backgroundPosition = 'center';
+                imageElement.style.width = '120px';
+                imageElement.style.height = '120px';
+                imageElement.style.borderRadius = '15px';
+                imageElement.style.margin = '0 auto';
+                imageElement.style.display = 'block';
+            }
+        }
+        
+        function setCarouselImage(slideId, imageIndex) {
+            const slideElement = document.getElementById(slideId);
+            const images = imageDatabase.carousel;
+            
+            if (imageIndex === 0 || !images[imageIndex]) {
+                // Usar gradiente por defecto
+                slideElement.style.backgroundImage = '';
+                slideElement.classList.add('hero-gradient');
+            } else {
+                // Usar imagen real
+                slideElement.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${images[imageIndex]})`;
+                slideElement.style.backgroundSize = 'cover';
+                slideElement.style.backgroundPosition = 'center';
+                slideElement.classList.remove('hero-gradient');
+            }
+        }
+        
+        function cycleFlavorImage(flavor) {
+            if (!isAdminMode) return;
+            
+            const images = imageDatabase.flavors[flavor];
+            currentImageIndexes[flavor] = (currentImageIndexes[flavor] + 1) % images.length;
+            setFlavorImage(flavor, currentImageIndexes[flavor]);
+            saveImageIndexes();
+            
+            const imageName = currentImageIndexes[flavor] === 0 ? 'Emoji' : `Imagen ${currentImageIndexes[flavor]}`;
+            showSaveNotification(`${flavor}: ${imageName}`);
+        }
+        
+        function cycleCarouselImage(slideId) {
+            if (!isAdminMode) return;
+            
+            const images = imageDatabase.carousel;
+            currentImageIndexes[slideId] = (currentImageIndexes[slideId] + 1) % images.length;
+            setCarouselImage(slideId, currentImageIndexes[slideId]);
+            saveImageIndexes();
+            
+            const imageName = currentImageIndexes[slideId] === 0 ? 'Gradiente' : `Imagen ${currentImageIndexes[slideId]}`;
+            showSaveNotification(`${slideId}: ${imageName}`);
+        }
+        
+        // Funciones de cambio de imagen (reemplaza las de upload)
+        function triggerUpload(flavor) {
+            if (isAdminMode) {
+                cycleFlavorImage(flavor);
+            }
+        }
+        
+        function triggerCarouselUpload(slideId) {
+            if (isAdminMode) {
+                cycleCarouselImage(slideId);
+            }
+        }
+        
         // Función para ir al siguiente slide
         function nextSlide() {
             currentSlide = (currentSlide + 1) % totalSlides;
@@ -674,7 +812,7 @@
         
         function checkAdminPassword() {
             const password = document.getElementById('adminPassword').value;
-            if (password === 'lalito2024') {
+            if (password === 'choroco') {
                 isAdminMode = true;
                 closeAdminModal();
                 document.getElementById('adminPanel').classList.remove('hidden');
@@ -791,76 +929,16 @@
         
         function resetImages() {
             if (isAdminMode && confirm('¿Estás seguro de resetear todas las imágenes?')) {
-                // Resetear imágenes de tarjetas
-                const flavors = ['oreo', 'nutella', '3leches', 'napolitana', 'chocoflan', 'pina', 'arequipe'];
-                const emojis = ['🍪', '🍫', '🥛', '🍓', '🍮', '🍍', '🍯'];
-                
-                flavors.forEach((flavor, index) => {
-                    const imageElement = document.getElementById(`${flavor}-image`);
-                    if (imageElement) {
-                        imageElement.innerHTML = emojis[index];
-                        imageElement.style.backgroundImage = '';
-                    }
+                // Resetear índices a 0 (emojis/gradiente)
+                Object.keys(currentImageIndexes).forEach(key => {
+                    currentImageIndexes[key] = 0;
                 });
                 
-                // Resetear slides del carrusel
-                document.getElementById('slide-1').style.backgroundImage = '';
-                document.getElementById('slide-1').classList.add('hero-gradient');
+                // Aplicar cambios visuales
+                loadSavedImages();
+                saveImageIndexes();
                 
                 showSaveNotification('Imágenes reseteadas correctamente');
-            }
-        }
-        
-        // Funciones de subida de imágenes
-        function triggerUpload(flavor) {
-            if (isAdminMode) {
-                document.getElementById(`upload-${flavor}`).click();
-            }
-        }
-        
-        function triggerCarouselUpload(slideId) {
-            if (isAdminMode) {
-                const slideNumber = slideId.split('-')[1];
-                document.getElementById(`upload-slide${slideNumber}`).click();
-            }
-        }
-        
-        function uploadImage(flavor, input) {
-            if (!isAdminMode) return;
-            
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const imageElement = document.getElementById(`${flavor}-image`);
-                    imageElement.style.backgroundImage = `url(${e.target.result})`;
-                    imageElement.style.backgroundSize = 'cover';
-                    imageElement.style.backgroundPosition = 'center';
-                    imageElement.style.width = '120px';
-                    imageElement.style.height = '120px';
-                    imageElement.style.borderRadius = '15px';
-                    imageElement.style.margin = '0 auto';
-                    imageElement.style.display = 'block';
-                    imageElement.innerHTML = '';
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-        
-        function uploadCarouselImage(slideId, input) {
-            if (!isAdminMode) return;
-            
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const slideElement = document.getElementById(slideId);
-                    slideElement.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${e.target.result})`;
-                    slideElement.style.backgroundSize = 'cover';
-                    slideElement.style.backgroundPosition = 'center';
-                    slideElement.classList.remove('hero-gradient');
-                };
-                reader.readAsDataURL(file);
             }
         }
         
@@ -997,11 +1075,9 @@
             }
         });
         
-        // Inicializar carrusel
+        // Inicializar carrusel y cargar imágenes guardadas
         updateCarousel();
+        loadSavedImages();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9775f85156417ea1',t:'MTc1NjU3NDU0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9776ce8e37a08f56',t:'MTc1NjU4MzMxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
-
-
