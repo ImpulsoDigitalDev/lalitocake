@@ -203,7 +203,7 @@
                         <button onclick="triggerUpload('oreo')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">🔄</button>
                     </div>
                     <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Oreo</h3>
-                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Delicioso pastel con Oreos trituradas y crema suave</p>
+                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Delicioso pastel con galletas Oreo trituradas y crema suave</p>
                     <button onclick="orderFlavor('Oreo')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
                         Pedir Ahora
                     </button>
@@ -470,7 +470,7 @@
                 <div class="text-center">
                     <p class="text-amber-200 text-sm editable" onclick="makeEditable(this)">Síguenos en nuestras redes sociales</p>
                 </div>
-                <p class="text-amber-200 text-sm mt-6 editable" onclick="makeEditable(this)">&copy; 2025 Lalito Cake. Diseñado por: LEONOVA STUDIO</p>
+                <p class="text-amber-200 text-sm mt-6 editable" onclick="makeEditable(this)">&copy; 2025 Lalito Cake. Diseñado por: LEONOVA STUDIO.</p>
             </div>
         </div>
     </footer>
@@ -537,6 +537,17 @@
                 </button>
                 <div class="absolute right-14 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                     Ver Imágenes Disponibles
+                    <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
+                </div>
+            </div>
+            
+            <!-- Botón Probar Imagen -->
+            <div class="relative group">
+                <button onclick="testImageLoad()" class="w-12 h-12 bg-orange-500 hover:bg-orange-600 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center">
+                    🧪
+                </button>
+                <div class="absolute right-14 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    Probar Carga de Imagen
                     <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
                 </div>
             </div>
@@ -623,78 +634,67 @@
         let isAdminMode = false;
         let chatMessages = [];
         
-        // Sistema de imágenes permanentes - Auto-detecta imágenes disponibles
+        // Sistema de imágenes simplificado - Funciona directamente con tu servidor
         const imageDatabase = {
-            // Imágenes de sabores
+            // Imágenes de sabores - Incluye todas las posibles imágenes
             flavors: {
-                oreo: ['🍪'],
-                nutella: ['🍫'],
-                '3leches': ['🥛'],
-                napolitana: ['🍓'],
-                chocoflan: ['🍮'],
-                pina: ['🍍'],
-                arequipe: ['🍯']
+                oreo: ['🍪', 'images/oreo-cake1.jpg', 'images/oreo-cake2.jpg', 'images/oreo-cake3.jpg', 'images/oreo-cake4.jpg', 'images/oreo-cake5.jpg'],
+                nutella: ['🍫', 'images/nutella-cake1.jpg', 'images/nutella-cake2.jpg', 'images/nutella-cake3.jpg', 'images/nutella-cake4.jpg', 'images/nutella-cake5.jpg'],
+                '3leches': ['🥛', 'images/3leches-cake1.jpg', 'images/3leches-cake2.jpg', 'images/3leches-cake3.jpg', 'images/3leches-cake4.jpg', 'images/3leches-cake5.jpg'],
+                napolitana: ['🍓', 'images/napolitana-cake1.jpg', 'images/napolitana-cake2.jpg', 'images/napolitana-cake3.jpg', 'images/napolitana-cake4.jpg', 'images/napolitana-cake5.jpg'],
+                chocoflan: ['🍮', 'images/chocoflan-cake1.jpg', 'images/chocoflan-cake2.jpg', 'images/chocoflan-cake3.jpg', 'images/chocoflan-cake4.jpg', 'images/chocoflan-cake5.jpg'],
+                pina: ['🍍', 'images/pina-cake1.jpg', 'images/pina-cake2.jpg', 'images/pina-cake3.jpg', 'images/pina-cake4.jpg', 'images/pina-cake5.jpg'],
+                arequipe: ['🍯', 'images/arequipe-cake1.jpg', 'images/arequipe-cake2.jpg', 'images/arequipe-cake3.jpg', 'images/arequipe-cake4.jpg', 'images/arequipe-cake5.jpg']
             },
             // Imágenes del carrusel
-            carousel: ['hero-gradient']
+            carousel: ['hero-gradient', 'images/carousel-slide1.jpg', 'images/carousel-slide2.jpg', 'images/carousel-slide3.jpg', 'images/hero1.jpg', 'images/hero2.jpg', 'images/banner1.jpg', 'images/banner2.jpg']
         };
         
-        // Auto-detectar imágenes disponibles en el servidor
-        async function detectAvailableImages() {
-            const flavors = Object.keys(imageDatabase.flavors);
-            
-            // Detectar imágenes de sabores
-            for (const flavor of flavors) {
-                for (let i = 1; i <= 5; i++) {
-                    const imagePath = `images/${flavor}-cake${i}.jpg`;
-                    if (await imageExists(imagePath)) {
-                        imageDatabase.flavors[flavor].push(imagePath);
-                    }
-                    // También probar con .png
-                    const imagePngPath = `images/${flavor}-cake${i}.png`;
-                    if (await imageExists(imagePngPath)) {
-                        imageDatabase.flavors[flavor].push(imagePngPath);
-                    }
-                }
-            }
-            
-            // Detectar imágenes del carrusel
-            for (let i = 1; i <= 10; i++) {
-                const imagePath = `images/carousel-slide${i}.jpg`;
-                if (await imageExists(imagePath)) {
-                    imageDatabase.carousel.push(imagePath);
-                }
-                // También probar con .png
-                const imagePngPath = `images/carousel-slide${i}.png`;
-                if (await imageExists(imagePngPath)) {
-                    imageDatabase.carousel.push(imagePngPath);
-                }
-            }
-            
-            // También detectar imágenes con nombres alternativos
-            const alternativeNames = ['hero1', 'hero2', 'hero3', 'banner1', 'banner2', 'banner3'];
-            for (const name of alternativeNames) {
-                const imagePath = `images/${name}.jpg`;
-                if (await imageExists(imagePath)) {
-                    imageDatabase.carousel.push(imagePath);
-                }
-                const imagePngPath = `images/${name}.png`;
-                if (await imageExists(imagePngPath)) {
-                    imageDatabase.carousel.push(imagePngPath);
-                }
-            }
-            
-            console.log('Imágenes detectadas:', imageDatabase);
-        }
-        
-        // Función para verificar si una imagen existe
+        // Función simple para verificar si una imagen existe
         function imageExists(imagePath) {
             return new Promise((resolve) => {
                 const img = new Image();
                 img.onload = () => resolve(true);
                 img.onerror = () => resolve(false);
                 img.src = imagePath;
+                // Timeout para evitar esperas largas
+                setTimeout(() => resolve(false), 2000);
             });
+        }
+        
+        // Detectar qué imágenes están realmente disponibles
+        async function detectAvailableImages() {
+            console.log('🔍 Detectando imágenes disponibles...');
+            
+            // Verificar imágenes de sabores
+            for (const [flavor, images] of Object.entries(imageDatabase.flavors)) {
+                const availableImages = [images[0]]; // Siempre incluir el emoji
+                
+                for (let i = 1; i < images.length; i++) {
+                    if (await imageExists(images[i])) {
+                        availableImages.push(images[i]);
+                        console.log(`✅ Encontrada: ${images[i]}`);
+                    }
+                }
+                
+                imageDatabase.flavors[flavor] = availableImages;
+            }
+            
+            // Verificar imágenes del carrusel
+            const availableCarousel = [imageDatabase.carousel[0]]; // Siempre incluir el gradiente
+            
+            for (let i = 1; i < imageDatabase.carousel.length; i++) {
+                if (await imageExists(imageDatabase.carousel[i])) {
+                    availableCarousel.push(imageDatabase.carousel[i]);
+                    console.log(`✅ Encontrada: ${imageDatabase.carousel[i]}`);
+                }
+            }
+            
+            imageDatabase.carousel = availableCarousel;
+            
+            const totalImages = Object.values(imageDatabase.flavors).reduce((acc, arr) => acc + arr.length - 1, 0) + 
+                               imageDatabase.carousel.length - 1;
+            console.log(`📊 Total de imágenes detectadas: ${totalImages}`);
         }
         
         // Índices actuales de imágenes (se guardan en localStorage)
@@ -724,9 +724,15 @@
         
         function setFlavorImage(flavor, imageIndex) {
             const imageElement = document.getElementById(`${flavor}-image`);
-            const images = imageDatabase.flavors[flavor];
+            if (!imageElement) return;
             
-            if (imageIndex === 0 || !images[imageIndex]) {
+            const images = imageDatabase.flavors[flavor];
+            if (!images || !images[imageIndex]) {
+                console.log(`⚠️ No se encontró imagen para ${flavor} índice ${imageIndex}`);
+                return;
+            }
+            
+            if (imageIndex === 0) {
                 // Mostrar emoji
                 imageElement.innerHTML = images[0];
                 imageElement.style.backgroundImage = '';
@@ -734,10 +740,11 @@
                 imageElement.style.height = '';
                 imageElement.style.borderRadius = '';
                 imageElement.style.display = '';
+                console.log(`😊 Mostrando emoji para ${flavor}: ${images[0]}`);
             } else {
                 // Mostrar imagen real
                 imageElement.innerHTML = '';
-                imageElement.style.backgroundImage = `url(${images[imageIndex]})`;
+                imageElement.style.backgroundImage = `url('${images[imageIndex]}')`;
                 imageElement.style.backgroundSize = 'cover';
                 imageElement.style.backgroundPosition = 'center';
                 imageElement.style.width = '120px';
@@ -745,6 +752,7 @@
                 imageElement.style.borderRadius = '15px';
                 imageElement.style.margin = '0 auto';
                 imageElement.style.display = 'block';
+                console.log(`🖼️ Mostrando imagen para ${flavor}: ${images[imageIndex]}`);
             }
         }
         
@@ -854,7 +862,7 @@
         
         function checkAdminPassword() {
             const password = document.getElementById('adminPassword').value;
-            if (password === 'choroco') {
+            if (password === 'lalito2024') {
                 isAdminMode = true;
                 closeAdminModal();
                 document.getElementById('adminPanel').classList.remove('hidden');
@@ -1013,6 +1021,43 @@
             }
             
             alert(report);
+        }
+        
+        // Función para probar la carga de una imagen específica
+        function testImageLoad() {
+            if (!isAdminMode) return;
+            
+            const testImage = 'images/oreo-cake1.jpg';
+            console.log(`🧪 Probando carga de imagen: ${testImage}`);
+            
+            const img = new Image();
+            img.onload = function() {
+                console.log(`✅ Imagen cargada exitosamente: ${testImage}`);
+                console.log(`📐 Dimensiones: ${this.width}x${this.height}`);
+                
+                // Forzar mostrar la imagen en el primer sabor
+                const oreoElement = document.getElementById('oreo-image');
+                if (oreoElement) {
+                    oreoElement.innerHTML = '';
+                    oreoElement.style.backgroundImage = `url('${testImage}')`;
+                    oreoElement.style.backgroundSize = 'cover';
+                    oreoElement.style.backgroundPosition = 'center';
+                    oreoElement.style.width = '120px';
+                    oreoElement.style.height = '120px';
+                    oreoElement.style.borderRadius = '15px';
+                    oreoElement.style.margin = '0 auto';
+                    oreoElement.style.display = 'block';
+                }
+                
+                showSaveNotification(`✅ Imagen de prueba cargada: ${testImage}`);
+            };
+            
+            img.onerror = function() {
+                console.log(`❌ Error cargando imagen: ${testImage}`);
+                showSaveNotification(`❌ No se pudo cargar: ${testImage}`);
+            };
+            
+            img.src = testImage;
         }
         
         function resetImages() {
@@ -1189,5 +1234,5 @@
         // También inicializar inmediatamente por si acaso
         initializeSystem();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97771b6ec4c4a50f',t:'MTc1NjU4NjQ2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9777684e65fb3404',t:'MTc1NjU4OTYxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
