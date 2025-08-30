@@ -102,13 +102,17 @@
             box-shadow: 0 8px 20px rgba(139, 69, 19, 0.4);
         }
         
-        .editable.editing-enabled {
-            transition: all 0.3s ease;
-        }
-        
-        .editable.editing-enabled:hover {
-            background-color: rgba(59, 130, 246, 0.1);
-            border-radius: 4px;
+        .cake-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 15px;
+            margin: 0 auto 16px auto;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
         }
     </style>
 </head>
@@ -119,7 +123,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                     <div class="text-4xl">🍰</div>
-                    <h1 class="font-dancing text-4xl font-bold text-shadow editable" onclick="makeEditable(this)">Lalito Cake</h1>
+                    <h1 class="font-dancing text-4xl font-bold text-shadow">Lalito Cake</h1>
                 </div>
                 <nav class="hidden md:flex space-x-8">
                     <a href="#inicio" class="hover:text-amber-200 transition-colors font-medium">Inicio</a>
@@ -141,27 +145,24 @@
         <div class="carousel-container">
             <div class="carousel-track" id="carouselTrack">
                 <div class="carousel-slide hero-gradient relative" id="slide-1">
-                    <button onclick="triggerCarouselUpload('slide-1')" class="upload-btn absolute top-4 right-4 bg-blue-500 text-white p-2 rounded-full text-sm hidden">🔄 Cambiar Imagen</button>
                     <div class="text-center text-white px-4">
-                        <h2 class="font-dancing text-6xl md:text-8xl font-bold mb-4 text-shadow editable" onclick="makeEditable(this)">Lalito Cake</h2>
-                        <p class="text-xl md:text-2xl mb-8 text-shadow editable" onclick="makeEditable(this)">Pasteles artesanales que endulzan tu vida</p>
+                        <h2 class="font-dancing text-6xl md:text-8xl font-bold mb-4 text-shadow">Lalito Cake</h2>
+                        <p class="text-xl md:text-2xl mb-8 text-shadow">Pasteles artesanales que endulzan tu vida</p>
                         <button onclick="scrollToSection('sabores')" class="btn-chocolate text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg">
                             Descubre Nuestros Sabores 🍰
                         </button>
                     </div>
                 </div>
                 <div class="carousel-slide relative" id="slide-2" style="background: linear-gradient(rgba(139,69,19,0.7), rgba(139,69,19,0.7)), url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 400%22><rect fill=%22%23D2691E%22 width=%221200%22 height=%22400%22/><circle fill=%22%238B4513%22 cx=%22200%22 cy=%22200%22 r=%2280%22/><circle fill=%22%23CD853F%22 cx=%22600%22 cy=%22150%22 r=%2260%22/><circle fill=%22%23A0522D%22 cx=%221000%22 cy=%22250%22 r=%2270%22/></svg>');">
-                    <button onclick="triggerCarouselUpload('slide-2')" class="upload-btn absolute top-4 right-4 bg-blue-500 text-white p-2 rounded-full text-sm hidden">🔄 Cambiar Imagen</button>
                     <div class="text-center text-white px-4">
-                        <h3 class="font-dancing text-5xl font-bold mb-4 text-shadow editable" onclick="makeEditable(this)">Sabores Únicos</h3>
-                        <p class="text-xl mb-6 text-shadow editable" onclick="makeEditable(this)">Desde Oreo hasta Chocoflan, cada bocado es una experiencia</p>
+                        <h3 class="font-dancing text-5xl font-bold mb-4 text-shadow">Sabores Únicos</h3>
+                        <p class="text-xl mb-6 text-shadow">Desde Oreo hasta Chocoflan, cada bocado es una experiencia</p>
                     </div>
                 </div>
                 <div class="carousel-slide relative" id="slide-3" style="background: linear-gradient(rgba(205,133,63,0.8), rgba(160,82,45,0.8)), url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 400%22><rect fill=%22%23CD853F%22 width=%221200%22 height=%22400%22/><rect fill=%22%238B4513%22 x=%22100%22 y=%22100%22 width=%22200%22 height=%22200%22 rx=%2220%22/><rect fill=%22%23A0522D%22 x=%22500%22 y=%2250%22 width=%22200%22 height=%22300%22 rx=%2220%22/><rect fill=%22%23D2691E%22 x=%22900%22 y=%22120%22 width=%22200%22 height=%22160%22 rx=%2220%22/></svg>');">
-                    <button onclick="triggerCarouselUpload('slide-3')" class="upload-btn absolute top-4 right-4 bg-blue-500 text-white p-2 rounded-full text-sm hidden">🔄 Cambiar Imagen</button>
                     <div class="text-center text-white px-4">
-                        <h3 class="font-dancing text-5xl font-bold mb-4 text-shadow editable" onclick="makeEditable(this)">Pedidos Especiales</h3>
-                        <p class="text-xl mb-6 text-shadow editable" onclick="makeEditable(this)">Creamos el pastel perfecto para tu ocasión especial</p>
+                        <h3 class="font-dancing text-5xl font-bold mb-4 text-shadow">Pedidos Especiales</h3>
+                        <p class="text-xl mb-6 text-shadow">Creamos el pastel perfecto para tu ocasión especial</p>
                     </div>
                 </div>
             </div>
@@ -191,97 +192,76 @@
     <section id="sabores" class="py-20 bg-gradient-to-br from-amber-50 to-orange-100">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="font-dancing text-5xl font-bold text-amber-900 mb-4 editable" onclick="makeEditable(this)">Nuestros Deliciosos Sabores</h2>
-                <p class="text-xl text-amber-700 max-w-2xl mx-auto editable" onclick="makeEditable(this)">Cada pastel es una obra de arte culinaria, preparado con los mejores ingredientes</p>
+                <h2 class="font-dancing text-5xl font-bold text-amber-900 mb-4">Nuestros Deliciosos Sabores</h2>
+                <p class="text-xl text-amber-700 max-w-2xl mx-auto">Cada pastel es una obra de arte culinaria, preparado con los mejores ingredientes</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <!-- Oreo -->
-                <div class="cake-card rounded-2xl p-6 text-center relative" id="card-oreo">
-                    <div class="image-container relative">
-                        <div class="text-6xl mb-4" id="oreo-image">🍪</div>
-                        <button onclick="triggerUpload('oreo')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">🔄</button>
-                    </div>
-                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Oreo</h3>
-                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Delicioso pastel con galletas Oreo trituradas y crema suave</p>
+                <div class="cake-card rounded-2xl p-6 text-center">
+                    <div class="cake-image" id="oreo-image">🍪</div>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2">Oreo</h3>
+                    <p class="text-amber-700 mb-4">Delicioso pastel con galletas Oreo trituradas y crema suave</p>
                     <button onclick="orderFlavor('Oreo')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
                         Pedir Ahora
                     </button>
                 </div>
                 
                 <!-- Nutella -->
-                <div class="cake-card rounded-2xl p-6 text-center relative" id="card-nutella">
-                    <div class="image-container relative">
-                        <div class="text-6xl mb-4" id="nutella-image">🍫</div>
-                        <button onclick="triggerUpload('nutella')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">🔄</button>
-                    </div>
-                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Nutella</h3>
-                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Irresistible combinación de chocolate y avellanas</p>
+                <div class="cake-card rounded-2xl p-6 text-center">
+                    <div class="cake-image" id="nutella-image">🍫</div>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2">Nutella</h3>
+                    <p class="text-amber-700 mb-4">Irresistible combinación de chocolate y avellanas</p>
                     <button onclick="orderFlavor('Nutella')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
                         Pedir Ahora
                     </button>
                 </div>
                 
                 <!-- 3 Leches -->
-                <div class="cake-card rounded-2xl p-6 text-center relative" id="card-3leches">
-                    <div class="image-container relative">
-                        <div class="text-6xl mb-4" id="3leches-image">🥛</div>
-                        <button onclick="triggerUpload('3leches')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">🔄</button>
-                    </div>
-                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">3 Leches</h3>
-                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Clásico pastel empapado en tres tipos de leche</p>
+                <div class="cake-card rounded-2xl p-6 text-center">
+                    <div class="cake-image" id="3leches-image">🥛</div>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2">3 Leches</h3>
+                    <p class="text-amber-700 mb-4">Clásico pastel empapado en tres tipos de leche</p>
                     <button onclick="orderFlavor('3 Leches')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
                         Pedir Ahora
                     </button>
                 </div>
                 
                 <!-- Napolitana -->
-                <div class="cake-card rounded-2xl p-6 text-center relative" id="card-napolitana">
-                    <div class="image-container relative">
-                        <div class="text-6xl mb-4" id="napolitana-image">🍓</div>
-                        <button onclick="triggerUpload('napolitana')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">🔄</button>
-                    </div>
-                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Napolitana</h3>
-                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Tres sabores en uno: vainilla, chocolate y fresa</p>
+                <div class="cake-card rounded-2xl p-6 text-center">
+                    <div class="cake-image" id="napolitana-image">🍓</div>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2">Napolitana</h3>
+                    <p class="text-amber-700 mb-4">Tres sabores en uno: vainilla, chocolate y fresa</p>
                     <button onclick="orderFlavor('Napolitana')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
                         Pedir Ahora
                     </button>
                 </div>
                 
                 <!-- Chocoflan -->
-                <div class="cake-card rounded-2xl p-6 text-center relative" id="card-chocoflan">
-                    <div class="image-container relative">
-                        <div class="text-6xl mb-4" id="chocoflan-image">🍮</div>
-                        <button onclick="triggerUpload('chocoflan')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">🔄</button>
-                    </div>
-                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Chocoflan</h3>
-                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Perfecta fusión de pastel de chocolate y flan</p>
+                <div class="cake-card rounded-2xl p-6 text-center">
+                    <div class="cake-image" id="chocoflan-image">🍮</div>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2">Chocoflan</h3>
+                    <p class="text-amber-700 mb-4">Perfecta fusión de pastel de chocolate y flan</p>
                     <button onclick="orderFlavor('Chocoflan')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
                         Pedir Ahora
                     </button>
                 </div>
                 
                 <!-- Piña -->
-                <div class="cake-card rounded-2xl p-6 text-center relative" id="card-pina">
-                    <div class="image-container relative">
-                        <div class="text-6xl mb-4" id="pina-image">🍍</div>
-                        <button onclick="triggerUpload('pina')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">🔄</button>
-                    </div>
-                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Piña</h3>
-                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Refrescante pastel con trozos de piña natural</p>
+                <div class="cake-card rounded-2xl p-6 text-center">
+                    <div class="cake-image" id="pina-image">🍍</div>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2">Piña</h3>
+                    <p class="text-amber-700 mb-4">Refrescante pastel con trozos de piña natural</p>
                     <button onclick="orderFlavor('Piña')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
                         Pedir Ahora
                     </button>
                 </div>
                 
                 <!-- Arequipe -->
-                <div class="cake-card rounded-2xl p-6 text-center relative" id="card-arequipe">
-                    <div class="image-container relative">
-                        <div class="text-6xl mb-4" id="arequipe-image">🍯</div>
-                        <button onclick="triggerUpload('arequipe')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">🔄</button>
-                    </div>
-                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Arequipe</h3>
-                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Dulce de leche cremoso que derrite el corazón</p>
+                <div class="cake-card rounded-2xl p-6 text-center">
+                    <div class="cake-image" id="arequipe-image">🍯</div>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2">Arequipe</h3>
+                    <p class="text-amber-700 mb-4">Dulce de leche cremoso que derrite el corazón</p>
                     <button onclick="orderFlavor('Arequipe')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
                         Pedir Ahora
                     </button>
@@ -290,8 +270,8 @@
                 <!-- Pedidos Especiales -->
                 <div class="cake-card rounded-2xl p-6 text-center border-4 border-amber-400">
                     <div class="text-6xl mb-4">✨</div>
-                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Pedidos Especiales</h3>
-                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Diseños únicos para bodas, cumpleaños y celebraciones</p>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2">Pedidos Especiales</h3>
+                    <p class="text-amber-700 mb-4">Diseños únicos para bodas, cumpleaños y celebraciones</p>
                     <button onclick="orderSpecial()" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
                         Consultar
                     </button>
@@ -304,21 +284,21 @@
     <section id="precios" class="py-20 chocolate-drip text-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="font-dancing text-5xl font-bold mb-4 text-shadow editable" onclick="makeEditable(this)">Nuestros Precios</h2>
-                <p class="text-xl max-w-2xl mx-auto text-shadow editable" onclick="makeEditable(this)">Calidad artesanal a precios accesibles</p>
+                <h2 class="font-dancing text-5xl font-bold mb-4 text-shadow">Nuestros Precios</h2>
+                <p class="text-xl max-w-2xl mx-auto text-shadow">Calidad artesanal a precios accesibles</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <!-- Raciones -->
                 <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 text-center">
                     <div class="text-5xl mb-4">🍰</div>
-                    <h3 class="font-dancing text-3xl font-bold mb-4 editable" onclick="makeEditable(this)">Por Ración</h3>
-                    <div class="text-4xl font-bold mb-4 text-amber-200 editable" onclick="makeEditable(this)">$5</div>
-                    <p class="mb-6 editable" onclick="makeEditable(this)">Porción individual perfecta para disfrutar</p>
+                    <h3 class="font-dancing text-3xl font-bold mb-4">Por Ración</h3>
+                    <div class="text-4xl font-bold mb-4 text-amber-200">$5</div>
+                    <p class="mb-6">Porción individual perfecta para disfrutar</p>
                     <ul class="text-left space-y-2 mb-6">
-                        <li class="editable" onclick="makeEditable(this)">✓ Todos los sabores disponibles</li>
-                        <li class="editable" onclick="makeEditable(this)">✓ Porción generosa</li>
-                        <li class="editable" onclick="makeEditable(this)">✓ Empaque individual</li>
+                        <li>✓ Todos los sabores disponibles</li>
+                        <li>✓ Porción generosa</li>
+                        <li>✓ Empaque individual</li>
                     </ul>
                     <button onclick="orderPortion()" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-full font-semibold transition-all">
                         Pedir Ración
@@ -328,14 +308,14 @@
                 <!-- Pasteles Completos -->
                 <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 text-center border-2 border-amber-400">
                     <div class="text-5xl mb-4">🎂</div>
-                    <h3 class="font-dancing text-3xl font-bold mb-4 editable" onclick="makeEditable(this)">Pastel Completo</h3>
-                    <div class="text-2xl font-bold mb-4 text-amber-200 editable" onclick="makeEditable(this)">Precio Variable</div>
-                    <p class="mb-6 editable" onclick="makeEditable(this)">Según peso final del pastel</p>
+                    <h3 class="font-dancing text-3xl font-bold mb-4">Pastel Completo</h3>
+                    <div class="text-2xl font-bold mb-4 text-amber-200">Precio Variable</div>
+                    <p class="mb-6">Según peso final del pastel</p>
                     <ul class="text-left space-y-2 mb-6">
-                        <li class="editable" onclick="makeEditable(this)">✓ Todos los sabores</li>
-                        <li class="editable" onclick="makeEditable(this)">✓ Diferentes tamaños</li>
-                        <li class="editable" onclick="makeEditable(this)">✓ Decoración incluida</li>
-                        <li class="editable" onclick="makeEditable(this)">✓ Consulta directa</li>
+                        <li>✓ Todos los sabores</li>
+                        <li>✓ Diferentes tamaños</li>
+                        <li>✓ Decoración incluida</li>
+                        <li>✓ Consulta directa</li>
                     </ul>
                     <button onclick="orderWholeCake()" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-full font-semibold transition-all">
                         Consultar Precio
@@ -345,14 +325,14 @@
                 <!-- Pedidos Especiales -->
                 <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 text-center">
                     <div class="text-5xl mb-4">🎨</div>
-                    <h3 class="font-dancing text-3xl font-bold mb-4 editable" onclick="makeEditable(this)">Pedidos Especiales</h3>
-                    <div class="text-2xl font-bold mb-4 text-amber-200 editable" onclick="makeEditable(this)">Cotización</div>
-                    <p class="mb-6 editable" onclick="makeEditable(this)">Para ocasiones especiales</p>
+                    <h3 class="font-dancing text-3xl font-bold mb-4">Pedidos Especiales</h3>
+                    <div class="text-2xl font-bold mb-4 text-amber-200">Cotización</div>
+                    <p class="mb-6">Para ocasiones especiales</p>
                     <ul class="text-left space-y-2 mb-6">
-                        <li class="editable" onclick="makeEditable(this)">✓ Diseños personalizados</li>
-                        <li class="editable" onclick="makeEditable(this)">✓ Bodas y eventos</li>
-                        <li class="editable" onclick="makeEditable(this)">✓ Temáticos</li>
-                        <li class="editable" onclick="makeEditable(this)">✓ Múltiples pisos</li>
+                        <li>✓ Diseños personalizados</li>
+                        <li>✓ Bodas y eventos</li>
+                        <li>✓ Temáticos</li>
+                        <li>✓ Múltiples pisos</li>
                     </ul>
                     <button onclick="orderSpecial()" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-full font-semibold transition-all">
                         Solicitar Cotización
@@ -366,8 +346,8 @@
     <section id="contacto" class="py-20 bg-gradient-to-br from-amber-50 to-orange-100">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="font-dancing text-5xl font-bold text-amber-900 mb-4 editable" onclick="makeEditable(this)">Contáctanos</h2>
-                <p class="text-xl text-amber-700 max-w-2xl mx-auto editable" onclick="makeEditable(this)">Estamos aquí para endulzar tu día</p>
+                <h2 class="font-dancing text-5xl font-bold text-amber-900 mb-4">Contáctanos</h2>
+                <p class="text-xl text-amber-700 max-w-2xl mx-auto">Estamos aquí para endulzar tu día</p>
             </div>
             
             <div class="max-w-4xl mx-auto">
@@ -381,7 +361,7 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-amber-900">WhatsApp</h3>
-                                <p class="text-amber-700 editable" onclick="makeEditable(this)">+58 412-987-3846</p>
+                                <p class="text-amber-700">+58 412-987-3846</p>
                             </div>
                         </div>
                         
@@ -394,7 +374,7 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-amber-900">Ubicación</h3>
-                                <p class="text-amber-700 editable" onclick="makeEditable(this)">Tucupita-Venezuela</p>
+                                <p class="text-amber-700">Venezuela</p>
                             </div>
                         </div>
                         
@@ -406,13 +386,13 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-amber-900">Horarios</h3>
-                                <p class="text-amber-700 editable" onclick="makeEditable(this)">Lun - Dom: 8:00 AM - 8:00 PM</p>
+                                <p class="text-amber-700">Lun - Dom: 8:00 AM - 8:00 PM</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="cake-card rounded-2xl p-8">
-                        <h3 class="font-dancing text-3xl font-bold text-amber-900 mb-6 text-center editable" onclick="makeEditable(this)">¡Haz tu Pedido!</h3>
+                        <h3 class="font-dancing text-3xl font-bold text-amber-900 mb-6 text-center">¡Haz tu Pedido!</h3>
                         <div class="space-y-4">
                             <button onclick="openWhatsApp('Hola! Me gustaría hacer un pedido de pasteles 🍰')" class="w-full bg-green-500 hover:bg-green-600 text-white py-4 px-6 rounded-full font-semibold text-lg transition-all flex items-center justify-center space-x-2">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -442,9 +422,9 @@
             <div class="text-center">
                 <div class="flex items-center justify-center space-x-3 mb-4">
                     <div class="text-4xl">🍰</div>
-                    <h3 class="font-dancing text-3xl font-bold editable" onclick="makeEditable(this)">Lalito Cake</h3>
+                    <h3 class="font-dancing text-3xl font-bold">Lalito Cake</h3>
                 </div>
-                <p class="text-amber-200 mb-6 editable" onclick="makeEditable(this)">Endulzando momentos especiales desde el corazón</p>
+                <p class="text-amber-200 mb-6">Endulzando momentos especiales desde el corazón</p>
                 <div class="flex justify-center space-x-6 mb-6">
                     <button onclick="openWhatsApp('Hola! Me gustaría conocer más sobre Lalito Cake 🍰')" class="text-amber-200 hover:text-white transition-colors" title="WhatsApp">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
@@ -468,9 +448,9 @@
                     </button>
                 </div>
                 <div class="text-center">
-                    <p class="text-amber-200 text-sm editable" onclick="makeEditable(this)">Síguenos en nuestras redes sociales</p>
+                    <p class="text-amber-200 text-sm">Síguenos en nuestras redes sociales</p>
                 </div>
-                <p class="text-amber-200 text-sm mt-6 editable" onclick="makeEditable(this)">&copy; 2025 Lalito Cake. Diseñado por: LEONOVA STUDIO.</p>
+                <p class="text-amber-200 text-sm mt-6">&copy; 2024 Lalito Cake. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
@@ -482,101 +462,6 @@
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
             </svg>
         </button>
-    </div>
-
-    <!-- Botón Admin (oculto) -->
-    <div class="fixed bottom-4 left-4 z-50">
-        <button onclick="showAdminModal()" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.1'" class="bg-gray-800 text-white p-2 rounded-full text-xs opacity-10 transition-all">
-            ⚙️
-        </button>
-    </div>
-
-    <!-- Modal de Admin -->
-    <div id="adminModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-2xl p-8 max-w-md w-full">
-                <h3 class="font-dancing text-3xl font-bold text-amber-900 mb-6 text-center">Acceso Administrador</h3>
-                <input type="password" id="adminPassword" placeholder="Contraseña" class="w-full p-3 border border-amber-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-amber-500">
-                <div class="flex space-x-4">
-                    <button onclick="checkAdminPassword()" class="flex-1 btn-chocolate text-white py-3 rounded-lg font-semibold">Acceder</button>
-                    <button onclick="closeAdminModal()" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-lg font-semibold">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Panel de Admin -->
-    <div id="adminPanel" class="fixed top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-30 backdrop-blur-sm rounded-2xl p-3 z-40 hidden">
-        <div class="flex flex-col space-y-3">
-            <!-- Botón Cambiar Imágenes -->
-            <div class="relative group">
-                <button onclick="enableImageUpload()" class="w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center">
-                    🔄
-                </button>
-                <div class="absolute right-14 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    Cambiar Imágenes
-                    <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
-                </div>
-            </div>
-            
-            <!-- Botón Editar Contenido -->
-            <div class="relative group">
-                <button onclick="editContent()" class="w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center">
-                    ✏️
-                </button>
-                <div class="absolute right-14 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    Editar Contenido
-                    <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
-                </div>
-            </div>
-            
-            <!-- Botón Mostrar Imágenes -->
-            <div class="relative group">
-                <button onclick="showAvailableImages()" class="w-12 h-12 bg-purple-500 hover:bg-purple-600 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center">
-                    📋
-                </button>
-                <div class="absolute right-14 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    Ver Imágenes Disponibles
-                    <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
-                </div>
-            </div>
-            
-            <!-- Botón Probar Imagen -->
-            <div class="relative group">
-                <button onclick="testImageLoad()" class="w-12 h-12 bg-orange-500 hover:bg-orange-600 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center">
-                    🧪
-                </button>
-                <div class="absolute right-14 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    Probar Carga de Imagen
-                    <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
-                </div>
-            </div>
-            
-            <!-- Botón Resetear Imágenes -->
-            <div class="relative group">
-                <button onclick="resetImages()" class="w-12 h-12 bg-red-500 hover:bg-red-600 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center">
-                    🔄
-                </button>
-                <div class="absolute right-14 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    Resetear Imágenes
-                    <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
-                </div>
-            </div>
-            
-            <!-- Separador -->
-            <div class="w-8 h-px bg-white bg-opacity-30 mx-auto"></div>
-            
-            <!-- Botón Salir del Admin -->
-            <div class="relative group">
-                <button onclick="toggleAdminMode()" class="w-12 h-12 bg-gray-600 hover:bg-gray-700 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center">
-                    🚪
-                </button>
-                <div class="absolute right-14 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    Salir del Admin
-                    <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Chat Widget -->
@@ -631,183 +516,67 @@
         // Variables del carrusel
         let currentSlide = 0;
         const totalSlides = 3;
-        let isAdminMode = false;
-        let chatMessages = [];
         
-        // Sistema de imágenes simplificado - Funciona directamente con tu servidor
-        const imageDatabase = {
-            // Imágenes de sabores - Incluye todas las posibles imágenes
-            flavors: {
-                oreo: ['🍪', 'images/oreo.jpg'],
-                nutella: ['🍫', 'images/nutella.jpg'],
-                tresleches': ['🥛', 'images/3leche.jpg'],
-                napolitana: ['🍓', 'images/napolitana.jpg'],
-                chocoflan: ['🍮', 'images/chocoflan.jpg'],
-                pina: ['🍍', 'images/pina.jpg'],
-                arequipe: ['🍯', 'images/arequipe.jpg']
-            },
-            // Imágenes del carrusel
-            carousel: ['hero-gradient', 'images/carousel-slide1.jpeg', 'images/carousel-slide2.jpeg', 'images/carousel-slide3.jpeg', 'images/hero1.jpg', 'images/hero2.jpg', 'images/banner1.jpg', 'images/banner2.jpg']
+        // Sistema de imágenes SÚPER SIMPLE - Solo intenta cargar las imágenes directamente
+        const cakeImages = {
+            'oreo': 'images/oreo-cake1.jpg',
+            'nutella': 'images/nutella-cake1.jpg',
+            '3leches': 'images/3leches-cake1.jpg',
+            'napolitana': 'images/napolitana-cake1.jpg',
+            'chocoflan': 'images/chocoflan-cake1.jpg',
+            'pina': 'images/pina-cake1.jpg',
+            'arequipe': 'images/arequipe-cake1.jpg'
         };
         
-        // Función simple para verificar si una imagen existe
-        function imageExists(imagePath) {
-            return new Promise((resolve) => {
-                const img = new Image();
-                img.onload = () => resolve(true);
-                img.onerror = () => resolve(false);
-                img.src = imagePath;
-                // Timeout para evitar esperas largas
-                setTimeout(() => resolve(false), 2000);
-            });
-        }
+        // Carrusel de imágenes
+        const carouselImages = [
+            'images/carousel-slide1.jpg',
+            'images/carousel-slide2.jpg',
+            'images/carousel-slide3.jpg'
+        ];
         
-        // Detectar qué imágenes están realmente disponibles
-        async function detectAvailableImages() {
-            console.log('🔍 Detectando imágenes disponibles...');
-            
-            // Verificar imágenes de sabores
-            for (const [flavor, images] of Object.entries(imageDatabase.flavors)) {
-                const availableImages = [images[0]]; // Siempre incluir el emoji
+        // Función simple para cargar imágenes
+        function loadCakeImages() {
+            Object.keys(cakeImages).forEach(flavor => {
+                const imageElement = document.getElementById(`${flavor}-image`);
+                const imagePath = cakeImages[flavor];
                 
-                for (let i = 1; i < images.length; i++) {
-                    if (await imageExists(images[i])) {
-                        availableImages.push(images[i]);
-                        console.log(`✅ Encontrada: ${images[i]}`);
-                    }
-                }
+                // Crear una imagen para probar si existe
+                const testImg = new Image();
+                testImg.onload = function() {
+                    // Si la imagen carga, mostrarla
+                    imageElement.style.backgroundImage = `url('${imagePath}')`;
+                    imageElement.style.backgroundSize = 'cover';
+                    imageElement.style.backgroundPosition = 'center';
+                    imageElement.innerHTML = ''; // Quitar el emoji
+                    console.log(`✅ Imagen cargada: ${imagePath}`);
+                };
+                testImg.onerror = function() {
+                    // Si no carga, mantener el emoji
+                    console.log(`❌ No se pudo cargar: ${imagePath}`);
+                };
+                testImg.src = imagePath;
+            });
+        }
+        
+        // Función para cargar imágenes del carrusel
+        function loadCarouselImages() {
+            carouselImages.forEach((imagePath, index) => {
+                const slideElement = document.getElementById(`slide-${index + 1}`);
                 
-                imageDatabase.flavors[flavor] = availableImages;
-            }
-            
-            // Verificar imágenes del carrusel
-            const availableCarousel = [imageDatabase.carousel[0]]; // Siempre incluir el gradiente
-            
-            for (let i = 1; i < imageDatabase.carousel.length; i++) {
-                if (await imageExists(imageDatabase.carousel[i])) {
-                    availableCarousel.push(imageDatabase.carousel[i]);
-                    console.log(`✅ Encontrada: ${imageDatabase.carousel[i]}`);
-                }
-            }
-            
-            imageDatabase.carousel = availableCarousel;
-            
-            const totalImages = Object.values(imageDatabase.flavors).reduce((acc, arr) => acc + arr.length - 1, 0) + 
-                               imageDatabase.carousel.length - 1;
-            console.log(`📊 Total de imágenes detectadas: ${totalImages}`);
-        }
-        
-        // Índices actuales de imágenes (se guardan en localStorage)
-        let currentImageIndexes = JSON.parse(localStorage.getItem('lalitoCakeImages')) || {
-            oreo: 0, nutella: 0, '3leches': 0, napolitana: 0, 
-            chocoflan: 0, pina: 0, arequipe: 0,
-            'slide-1': 0, 'slide-2': 0, 'slide-3': 0
-        };
-        
-        function saveImageIndexes() {
-            localStorage.setItem('lalitoCakeImages', JSON.stringify(currentImageIndexes));
-        }
-        
-        function loadSavedImages() {
-            // Cargar imágenes de sabores
-            Object.keys(imageDatabase.flavors).forEach(flavor => {
-                const index = currentImageIndexes[flavor] || 0;
-                setFlavorImage(flavor, index);
+                const testImg = new Image();
+                testImg.onload = function() {
+                    slideElement.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${imagePath}')`;
+                    slideElement.style.backgroundSize = 'cover';
+                    slideElement.style.backgroundPosition = 'center';
+                    slideElement.classList.remove('hero-gradient');
+                    console.log(`✅ Imagen del carrusel cargada: ${imagePath}`);
+                };
+                testImg.onerror = function() {
+                    console.log(`❌ No se pudo cargar imagen del carrusel: ${imagePath}`);
+                };
+                testImg.src = imagePath;
             });
-            
-            // Cargar imágenes del carrusel
-            ['slide-1', 'slide-2', 'slide-3'].forEach(slide => {
-                const index = currentImageIndexes[slide] || 0;
-                setCarouselImage(slide, index);
-            });
-        }
-        
-        function setFlavorImage(flavor, imageIndex) {
-            const imageElement = document.getElementById(`${flavor}-image`);
-            if (!imageElement) return;
-            
-            const images = imageDatabase.flavors[flavor];
-            if (!images || !images[imageIndex]) {
-                console.log(`⚠️ No se encontró imagen para ${flavor} índice ${imageIndex}`);
-                return;
-            }
-            
-            if (imageIndex === 0) {
-                // Mostrar emoji
-                imageElement.innerHTML = images[0];
-                imageElement.style.backgroundImage = '';
-                imageElement.style.width = '';
-                imageElement.style.height = '';
-                imageElement.style.borderRadius = '';
-                imageElement.style.display = '';
-                console.log(`😊 Mostrando emoji para ${flavor}: ${images[0]}`);
-            } else {
-                // Mostrar imagen real
-                imageElement.innerHTML = '';
-                imageElement.style.backgroundImage = `url('${images[imageIndex]}')`;
-                imageElement.style.backgroundSize = 'cover';
-                imageElement.style.backgroundPosition = 'center';
-                imageElement.style.width = '120px';
-                imageElement.style.height = '120px';
-                imageElement.style.borderRadius = '15px';
-                imageElement.style.margin = '0 auto';
-                imageElement.style.display = 'block';
-                console.log(`🖼️ Mostrando imagen para ${flavor}: ${images[imageIndex]}`);
-            }
-        }
-        
-        function setCarouselImage(slideId, imageIndex) {
-            const slideElement = document.getElementById(slideId);
-            const images = imageDatabase.carousel;
-            
-            if (imageIndex === 0 || !images[imageIndex]) {
-                // Usar gradiente por defecto
-                slideElement.style.backgroundImage = '';
-                slideElement.classList.add('hero-gradient');
-            } else {
-                // Usar imagen real
-                slideElement.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${images[imageIndex]})`;
-                slideElement.style.backgroundSize = 'cover';
-                slideElement.style.backgroundPosition = 'center';
-                slideElement.classList.remove('hero-gradient');
-            }
-        }
-        
-        function cycleFlavorImage(flavor) {
-            if (!isAdminMode) return;
-            
-            const images = imageDatabase.flavors[flavor];
-            currentImageIndexes[flavor] = (currentImageIndexes[flavor] + 1) % images.length;
-            setFlavorImage(flavor, currentImageIndexes[flavor]);
-            saveImageIndexes();
-            
-            const imageName = currentImageIndexes[flavor] === 0 ? 'Emoji' : `Imagen ${currentImageIndexes[flavor]}`;
-            showSaveNotification(`${flavor}: ${imageName}`);
-        }
-        
-        function cycleCarouselImage(slideId) {
-            if (!isAdminMode) return;
-            
-            const images = imageDatabase.carousel;
-            currentImageIndexes[slideId] = (currentImageIndexes[slideId] + 1) % images.length;
-            setCarouselImage(slideId, currentImageIndexes[slideId]);
-            saveImageIndexes();
-            
-            const imageName = currentImageIndexes[slideId] === 0 ? 'Gradiente' : `Imagen ${currentImageIndexes[slideId]}`;
-            showSaveNotification(`${slideId}: ${imageName}`);
-        }
-        
-        // Funciones de cambio de imagen (reemplaza las de upload)
-        function triggerUpload(flavor) {
-            if (isAdminMode) {
-                cycleFlavorImage(flavor);
-            }
-        }
-        
-        function triggerCarouselUpload(slideId) {
-            if (isAdminMode) {
-                cycleCarouselImage(slideId);
-            }
         }
         
         // Función para ir al siguiente slide
@@ -849,231 +618,6 @@
         
         // Auto-play del carrusel
         setInterval(nextSlide, 5000);
-        
-        // Funciones de Admin
-        function showAdminModal() {
-            document.getElementById('adminModal').classList.remove('hidden');
-        }
-        
-        function closeAdminModal() {
-            document.getElementById('adminModal').classList.add('hidden');
-            document.getElementById('adminPassword').value = '';
-        }
-        
-        function checkAdminPassword() {
-            const password = document.getElementById('adminPassword').value;
-            if (password === 'lalito2024') {
-                isAdminMode = true;
-                closeAdminModal();
-                document.getElementById('adminPanel').classList.remove('hidden');
-                enableImageUpload();
-                showSaveNotification('¡Modo administrador activado!');
-            } else {
-                alert('Contraseña incorrecta');
-            }
-        }
-        
-        function toggleAdminMode() {
-            isAdminMode = false;
-            document.getElementById('adminPanel').classList.add('hidden');
-            // Ocultar todos los botones de upload
-            document.querySelectorAll('.upload-btn').forEach(btn => {
-                btn.classList.add('hidden');
-            });
-            // Desactivar modo edición
-            document.querySelectorAll('.editable').forEach(element => {
-                element.classList.remove('editing-enabled');
-                element.style.outline = 'none';
-                element.style.cursor = 'default';
-            });
-            showSaveNotification('Modo administrador desactivado');
-        }
-        
-        function enableImageUpload() {
-            if (isAdminMode) {
-                document.querySelectorAll('.upload-btn').forEach(btn => {
-                    btn.classList.remove('hidden');
-                });
-            }
-        }
-        
-        function editContent() {
-            if (isAdminMode) {
-                toggleEditMode();
-            }
-        }
-        
-        function toggleEditMode() {
-            const editableElements = document.querySelectorAll('.editable');
-            const isCurrentlyEditing = document.querySelector('.editing-enabled');
-            
-            if (isCurrentlyEditing) {
-                // Desactivar modo edición
-                editableElements.forEach(element => {
-                    element.classList.remove('editing-enabled');
-                    element.style.outline = 'none';
-                    element.style.cursor = 'default';
-                });
-                showSaveNotification('Modo edición desactivado');
-            } else {
-                // Activar modo edición
-                editableElements.forEach(element => {
-                    element.classList.add('editing-enabled');
-                    element.style.outline = '2px dashed #3B82F6';
-                    element.style.cursor = 'pointer';
-                });
-                showSaveNotification('Modo edición activado - Haz clic en cualquier texto para editarlo');
-            }
-        }
-        
-        function makeEditable(element) {
-            if (!isAdminMode || !element.classList.contains('editing-enabled')) return;
-            
-            const originalText = element.textContent;
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.value = originalText;
-            input.className = 'w-full p-2 border-2 border-blue-500 rounded bg-white text-black';
-            input.style.fontSize = window.getComputedStyle(element).fontSize;
-            input.style.fontWeight = window.getComputedStyle(element).fontWeight;
-            input.style.textAlign = window.getComputedStyle(element).textAlign;
-            
-            element.innerHTML = '';
-            element.appendChild(input);
-            input.focus();
-            input.select();
-            
-            function saveEdit() {
-                const newText = input.value.trim();
-                if (newText && newText !== originalText) {
-                    element.textContent = newText;
-                    showSaveNotification('Contenido actualizado: ' + newText.substring(0, 30) + '...');
-                } else {
-                    element.textContent = originalText;
-                }
-                element.style.outline = '2px dashed #3B82F6';
-            }
-            
-            input.addEventListener('blur', saveEdit);
-            input.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    input.blur();
-                }
-                if (e.key === 'Escape') {
-                    element.textContent = originalText;
-                    element.style.outline = '2px dashed #3B82F6';
-                }
-            });
-        }
-        
-        function showSaveNotification(message) {
-            const notification = document.createElement('div');
-            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 max-w-sm';
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
-        
-        function showAvailableImages() {
-            if (!isAdminMode) return;
-            
-            let report = '📋 IMÁGENES DETECTADAS EN EL SERVIDOR:\n\n';
-            
-            // Mostrar imágenes de sabores
-            report += '🍰 SABORES:\n';
-            Object.keys(imageDatabase.flavors).forEach(flavor => {
-                const images = imageDatabase.flavors[flavor];
-                const realImages = images.slice(1); // Excluir emoji
-                if (realImages.length > 0) {
-                    report += `  • ${flavor}: ${realImages.length} imagen(es)\n`;
-                    realImages.forEach((img, index) => {
-                        report += `    - ${img}\n`;
-                    });
-                } else {
-                    report += `  • ${flavor}: Solo emoji (sin imágenes)\n`;
-                }
-            });
-            
-            // Mostrar imágenes del carrusel
-            report += '\n🎠 CARRUSEL:\n';
-            const carouselImages = imageDatabase.carousel.slice(1); // Excluir gradiente
-            if (carouselImages.length > 0) {
-                report += `  • ${carouselImages.length} imagen(es) disponibles:\n`;
-                carouselImages.forEach((img, index) => {
-                    report += `    - ${img}\n`;
-                });
-            } else {
-                report += '  • Solo gradiente (sin imágenes)\n';
-            }
-            
-            // Mostrar total
-            const totalImages = Object.values(imageDatabase.flavors).reduce((acc, arr) => acc + arr.length - 1, 0) + 
-                               imageDatabase.carousel.length - 1;
-            report += `\n📊 TOTAL: ${totalImages} imágenes detectadas`;
-            
-            if (totalImages === 0) {
-                report += '\n\n💡 SUGERENCIA: Asegúrate de que las imágenes estén en la carpeta "images/" con nombres como:\n';
-                report += '  • oreo-cake1.jpg, oreo-cake2.jpg, etc.\n';
-                report += '  • carousel-slide1.jpg, carousel-slide2.jpg, etc.';
-            }
-            
-            alert(report);
-        }
-        
-        // Función para probar la carga de una imagen específica
-        function testImageLoad() {
-            if (!isAdminMode) return;
-            
-            const testImage = 'images/oreo-cake1.jpg';
-            console.log(`🧪 Probando carga de imagen: ${testImage}`);
-            
-            const img = new Image();
-            img.onload = function() {
-                console.log(`✅ Imagen cargada exitosamente: ${testImage}`);
-                console.log(`📐 Dimensiones: ${this.width}x${this.height}`);
-                
-                // Forzar mostrar la imagen en el primer sabor
-                const oreoElement = document.getElementById('oreo-image');
-                if (oreoElement) {
-                    oreoElement.innerHTML = '';
-                    oreoElement.style.backgroundImage = `url('${testImage}')`;
-                    oreoElement.style.backgroundSize = 'cover';
-                    oreoElement.style.backgroundPosition = 'center';
-                    oreoElement.style.width = '120px';
-                    oreoElement.style.height = '120px';
-                    oreoElement.style.borderRadius = '15px';
-                    oreoElement.style.margin = '0 auto';
-                    oreoElement.style.display = 'block';
-                }
-                
-                showSaveNotification(`✅ Imagen de prueba cargada: ${testImage}`);
-            };
-            
-            img.onerror = function() {
-                console.log(`❌ Error cargando imagen: ${testImage}`);
-                showSaveNotification(`❌ No se pudo cargar: ${testImage}`);
-            };
-            
-            img.src = testImage;
-        }
-        
-        function resetImages() {
-            if (isAdminMode && confirm('¿Estás seguro de resetear todas las imágenes?')) {
-                // Resetear índices a 0 (emojis/gradiente)
-                Object.keys(currentImageIndexes).forEach(key => {
-                    currentImageIndexes[key] = 0;
-                });
-                
-                // Aplicar cambios visuales
-                loadSavedImages();
-                saveImageIndexes();
-                
-                showSaveNotification('Imágenes reseteadas correctamente');
-            }
-        }
         
         // Funciones del Chat Widget
         function toggleChatWidget() {
@@ -1135,17 +679,14 @@
         
         // Funciones para redes sociales
         function openInstagram() {
-            // Cambiar por el usuario real de Instagram
             window.open('https://instagram.com/lalitocake', '_blank');
         }
         
         function openFacebook() {
-            // Cambiar por la página real de Facebook
             window.open('https://facebook.com/lalitocake', '_blank');
         }
         
         function openTikTok() {
-            // Cambiar por el usuario real de TikTok
             window.open('https://tiktok.com/@lalitocake', '_blank');
         }
         
@@ -1201,41 +742,19 @@
             }
         });
         
-        // Event listener para Enter en el password de admin
-        document.getElementById('adminPassword').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkAdminPassword();
-            }
-        });
-        
-        // Inicializar sistema
-        async function initializeSystem() {
-            // Detectar imágenes disponibles
-            await detectAvailableImages();
+        // Inicializar cuando la página esté lista
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🍰 Iniciando Lalito Cake...');
             
-            // Cargar imágenes guardadas
-            loadSavedImages();
+            // Cargar imágenes
+            loadCakeImages();
+            loadCarouselImages();
             
             // Inicializar carrusel
             updateCarousel();
             
-            // Si hay imágenes disponibles, mostrar notificación
-            const totalImages = Object.values(imageDatabase.flavors).reduce((acc, arr) => acc + arr.length - 1, 0) + 
-                               imageDatabase.carousel.length - 1;
-            
-            if (totalImages > 0) {
-                console.log(`✅ Sistema iniciado: ${totalImages} imágenes detectadas en el servidor`);
-            }
-        }
-        
-        // Inicializar cuando la página esté lista
-        document.addEventListener('DOMContentLoaded', initializeSystem);
-        
-        // También inicializar inmediatamente por si acaso
-        initializeSystem();
+            console.log('✅ Página lista. Si tienes imágenes en la carpeta "images/" con los nombres correctos, deberían aparecer automáticamente.');
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9777684e65fb3404',t:'MTc1NjU4OTYxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97783bca77d9a50f',t:'MTc1NjU5ODI3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
-
-
