@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lalito Cake - Deliciosos Pasteles Artesanales</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        .font-dancing { font-family: 'Dancing Script', cursive; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        
+        .chocolate-drip {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 25%, #CD853F 50%, #D2691E 75%, #8B4513 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chocolate-drip::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent 0px,
+                transparent 15px,
+                #8B4513 15px,
+                #8B4513 25px,
+                transparent 25px,
+                transparent 40px
+            );
+            border-radius: 0 0 50% 50%;
+        }
+        
+        .cake-card {
+            background: linear-gradient(145deg, #FFF8DC, #F5DEB3);
+            box-shadow: 0 8px 32px rgba(139, 69, 19, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .cake-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 69, 19, 0.4);
+        }
+        
+        .floating-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #CD853F 100%);
+        }
+        
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .btn-chocolate {
+            background: linear-gradient(145deg, #8B4513, #A0522D);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-chocolate:hover {
+            background: linear-gradient(145deg, #A0522D, #CD853F);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.4);
+        }
+        
+        .editable.editing-enabled {
+            transition: all 0.3s ease;
+        }
+        
+        .editable.editing-enabled:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="font-poppins bg-gradient-to-br from-amber-50 to-orange-100">
+    <!-- Header -->
+    <header class="chocolate-drip text-white shadow-2xl sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="text-4xl">🍰</div>
+                    <h1 class="font-dancing text-4xl font-bold text-shadow editable" onclick="makeEditable(this)">Lalito Cake</h1>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="hover:text-amber-200 transition-colors font-medium">Inicio</a>
+                    <a href="#sabores" class="hover:text-amber-200 transition-colors font-medium">Sabores</a>
+                    <a href="#precios" class="hover:text-amber-200 transition-colors font-medium">Precios</a>
+                    <a href="#contacto" class="hover:text-amber-200 transition-colors font-medium">Contacto</a>
+                </nav>
+                <button class="md:hidden text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section con Carrusel -->
+    <section id="inicio" class="relative">
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-slide hero-gradient relative" id="slide-1">
+                    <input type="file" id="upload-slide1" accept="image/*" class="hidden" onchange="uploadCarouselImage('slide-1', this)">
+                    <button onclick="triggerCarouselUpload('slide-1')" class="upload-btn absolute top-4 right-4 bg-blue-500 text-white p-2 rounded-full text-sm hidden">📷 Cambiar Fondo</button>
+                    <div class="text-center text-white px-4">
+                        <h2 class="font-dancing text-6xl md:text-8xl font-bold mb-4 text-shadow editable" onclick="makeEditable(this)">Lalito Cake</h2>
+                        <p class="text-xl md:text-2xl mb-8 text-shadow editable" onclick="makeEditable(this)">Pasteles artesanales que endulzan tu vida</p>
+                        <button onclick="scrollToSection('sabores')" class="btn-chocolate text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg">
+                            Descubre Nuestros Sabores 🍰
+                        </button>
+                    </div>
+                </div>
+                <div class="carousel-slide relative" id="slide-2" style="background: linear-gradient(rgba(139,69,19,0.7), rgba(139,69,19,0.7)), url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 400%22><rect fill=%22%23D2691E%22 width=%221200%22 height=%22400%22/><circle fill=%22%238B4513%22 cx=%22200%22 cy=%22200%22 r=%2280%22/><circle fill=%22%23CD853F%22 cx=%22600%22 cy=%22150%22 r=%2260%22/><circle fill=%22%23A0522D%22 cx=%221000%22 cy=%22250%22 r=%2270%22/></svg>');">
+                    <input type="file" id="upload-slide2" accept="image/*" class="hidden" onchange="uploadCarouselImage('slide-2', this)">
+                    <button onclick="triggerCarouselUpload('slide-2')" class="upload-btn absolute top-4 right-4 bg-blue-500 text-white p-2 rounded-full text-sm hidden">📷 Cambiar Fondo</button>
+                    <div class="text-center text-white px-4">
+                        <h3 class="font-dancing text-5xl font-bold mb-4 text-shadow editable" onclick="makeEditable(this)">Sabores Únicos</h3>
+                        <p class="text-xl mb-6 text-shadow editable" onclick="makeEditable(this)">Desde Oreo hasta Chocoflan, cada bocado es una experiencia</p>
+                    </div>
+                </div>
+                <div class="carousel-slide relative" id="slide-3" style="background: linear-gradient(rgba(205,133,63,0.8), rgba(160,82,45,0.8)), url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 400%22><rect fill=%22%23CD853F%22 width=%221200%22 height=%22400%22/><rect fill=%22%238B4513%22 x=%22100%22 y=%22100%22 width=%22200%22 height=%22200%22 rx=%2220%22/><rect fill=%22%23A0522D%22 x=%22500%22 y=%2250%22 width=%22200%22 height=%22300%22 rx=%2220%22/><rect fill=%22%23D2691E%22 x=%22900%22 y=%22120%22 width=%22200%22 height=%22160%22 rx=%2220%22/></svg>');">
+                    <input type="file" id="upload-slide3" accept="image/*" class="hidden" onchange="uploadCarouselImage('slide-3', this)">
+                    <button onclick="triggerCarouselUpload('slide-3')" class="upload-btn absolute top-4 right-4 bg-blue-500 text-white p-2 rounded-full text-sm hidden">📷 Cambiar Fondo</button>
+                    <div class="text-center text-white px-4">
+                        <h3 class="font-dancing text-5xl font-bold mb-4 text-shadow editable" onclick="makeEditable(this)">Pedidos Especiales</h3>
+                        <p class="text-xl mb-6 text-shadow editable" onclick="makeEditable(this)">Creamos el pastel perfecto para tu ocasión especial</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Controles del carrusel -->
+        <button onclick="previousSlide()" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+        </button>
+        <button onclick="nextSlide()" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 transition-all">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </button>
+        
+        <!-- Indicadores -->
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+            <button onclick="goToSlide(0)" class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition-all"></button>
+            <button onclick="goToSlide(1)" class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition-all"></button>
+            <button onclick="goToSlide(2)" class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition-all"></button>
+        </div>
+    </section>
+
+    <!-- Sección de Sabores -->
+    <section id="sabores" class="py-20 bg-gradient-to-br from-amber-50 to-orange-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-dancing text-5xl font-bold text-amber-900 mb-4 editable" onclick="makeEditable(this)">Nuestros Deliciosos Sabores</h2>
+                <p class="text-xl text-amber-700 max-w-2xl mx-auto editable" onclick="makeEditable(this)">Cada pastel es una obra de arte culinaria, preparado con los mejores ingredientes</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Oreo -->
+                <div class="cake-card rounded-2xl p-6 text-center relative" id="card-oreo">
+                    <div class="image-container relative">
+                        <div class="text-6xl mb-4" id="oreo-image">🍪</div>
+                        <input type="file" id="upload-oreo" accept="image/*" class="hidden" onchange="uploadImage('oreo', this)">
+                        <button onclick="triggerUpload('oreo')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">📷</button>
+                    </div>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Oreo</h3>
+                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Delicioso pastel con galletas Oreo trituradas y crema suave</p>
+                    <button onclick="orderFlavor('Oreo')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
+                        Pedir Ahora
+                    </button>
+                </div>
+                
+                <!-- Nutella -->
+                <div class="cake-card rounded-2xl p-6 text-center relative" id="card-nutella">
+                    <div class="image-container relative">
+                        <div class="text-6xl mb-4" id="nutella-image">🍫</div>
+                        <input type="file" id="upload-nutella" accept="image/*" class="hidden" onchange="uploadImage('nutella', this)">
+                        <button onclick="triggerUpload('nutella')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">📷</button>
+                    </div>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Nutella</h3>
+                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Irresistible combinación de chocolate y avellanas</p>
+                    <button onclick="orderFlavor('Nutella')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
+                        Pedir Ahora
+                    </button>
+                </div>
+                
+                <!-- 3 Leches -->
+                <div class="cake-card rounded-2xl p-6 text-center relative" id="card-3leches">
+                    <div class="image-container relative">
+                        <div class="text-6xl mb-4" id="3leches-image">🥛</div>
+                        <input type="file" id="upload-3leches" accept="image/*" class="hidden" onchange="uploadImage('3leches', this)">
+                        <button onclick="triggerUpload('3leches')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">📷</button>
+                    </div>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">3 Leches</h3>
+                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Clásico pastel empapado en tres tipos de leche</p>
+                    <button onclick="orderFlavor('3 Leches')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
+                        Pedir Ahora
+                    </button>
+                </div>
+                
+                <!-- Napolitana -->
+                <div class="cake-card rounded-2xl p-6 text-center relative" id="card-napolitana">
+                    <div class="image-container relative">
+                        <div class="text-6xl mb-4" id="napolitana-image">🍓</div>
+                        <input type="file" id="upload-napolitana" accept="image/*" class="hidden" onchange="uploadImage('napolitana', this)">
+                        <button onclick="triggerUpload('napolitana')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">📷</button>
+                    </div>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Napolitana</h3>
+                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Tres sabores en uno: vainilla, chocolate y fresa</p>
+                    <button onclick="orderFlavor('Napolitana')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
+                        Pedir Ahora
+                    </button>
+                </div>
+                
+                <!-- Chocoflan -->
+                <div class="cake-card rounded-2xl p-6 text-center relative" id="card-chocoflan">
+                    <div class="image-container relative">
+                        <div class="text-6xl mb-4" id="chocoflan-image">🍮</div>
+                        <input type="file" id="upload-chocoflan" accept="image/*" class="hidden" onchange="uploadImage('chocoflan', this)">
+                        <button onclick="triggerUpload('chocoflan')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">📷</button>
+                    </div>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Chocoflan</h3>
+                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Perfecta fusión de pastel de chocolate y flan</p>
+                    <button onclick="orderFlavor('Chocoflan')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
+                        Pedir Ahora
+                    </button>
+                </div>
+                
+                <!-- Piña -->
+                <div class="cake-card rounded-2xl p-6 text-center relative" id="card-pina">
+                    <div class="image-container relative">
+                        <div class="text-6xl mb-4" id="pina-image">🍍</div>
+                        <input type="file" id="upload-pina" accept="image/*" class="hidden" onchange="uploadImage('pina', this)">
+                        <button onclick="triggerUpload('pina')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">📷</button>
+                    </div>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Piña</h3>
+                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Refrescante pastel con trozos de piña natural</p>
+                    <button onclick="orderFlavor('Piña')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
+                        Pedir Ahora
+                    </button>
+                </div>
+                
+                <!-- Arequipe -->
+                <div class="cake-card rounded-2xl p-6 text-center relative" id="card-arequipe">
+                    <div class="image-container relative">
+                        <div class="text-6xl mb-4" id="arequipe-image">🍯</div>
+                        <input type="file" id="upload-arequipe" accept="image/*" class="hidden" onchange="uploadImage('arequipe', this)">
+                        <button onclick="triggerUpload('arequipe')" class="upload-btn absolute top-0 right-0 bg-blue-500 text-white p-1 rounded-full text-xs hidden">📷</button>
+                    </div>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Arequipe</h3>
+                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Dulce de leche cremoso que derrite el corazón</p>
+                    <button onclick="orderFlavor('Arequipe')" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
+                        Pedir Ahora
+                    </button>
+                </div>
+                
+                <!-- Pedidos Especiales -->
+                <div class="cake-card rounded-2xl p-6 text-center border-4 border-amber-400">
+                    <div class="text-6xl mb-4">✨</div>
+                    <h3 class="font-dancing text-2xl font-bold text-amber-900 mb-2 editable" onclick="makeEditable(this)">Pedidos Especiales</h3>
+                    <p class="text-amber-700 mb-4 editable" onclick="makeEditable(this)">Diseños únicos para bodas, cumpleaños y celebraciones</p>
+                    <button onclick="orderSpecial()" class="btn-chocolate text-white px-6 py-2 rounded-full font-semibold">
+                        Consultar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Precios -->
+    <section id="precios" class="py-20 chocolate-drip text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-dancing text-5xl font-bold mb-4 text-shadow editable" onclick="makeEditable(this)">Nuestros Precios</h2>
+                <p class="text-xl max-w-2xl mx-auto text-shadow editable" onclick="makeEditable(this)">Calidad artesanal a precios accesibles</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Raciones -->
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 text-center">
+                    <div class="text-5xl mb-4">🍰</div>
+                    <h3 class="font-dancing text-3xl font-bold mb-4 editable" onclick="makeEditable(this)">Por Ración</h3>
+                    <div class="text-4xl font-bold mb-4 text-amber-200 editable" onclick="makeEditable(this)">$5</div>
+                    <p class="mb-6 editable" onclick="makeEditable(this)">Porción individual perfecta para disfrutar</p>
+                    <ul class="text-left space-y-2 mb-6">
+                        <li class="editable" onclick="makeEditable(this)">✓ Todos los sabores disponibles</li>
+                        <li class="editable" onclick="makeEditable(this)">✓ Porción generosa</li>
+                        <li class="editable" onclick="makeEditable(this)">✓ Empaque individual</li>
+                    </ul>
+                    <button onclick="orderPortion()" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-full font-semibold transition-all">
+                        Pedir Ración
+                    </button>
+                </div>
+                
+                <!-- Pasteles Completos -->
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 text-center border-2 border-amber-400">
+                    <div class="text-5xl mb-4">🎂</div>
+                    <h3 class="font-dancing text-3xl font-bold mb-4 editable" onclick="makeEditable(this)">Pastel Completo</h3>
+                    <div class="text-2xl font-bold mb-4 text-amber-200 editable" onclick="makeEditable(this)">Precio Variable</div>
+                    <p class="mb-6 editable" onclick="makeEditable(this)">Según peso final del pastel</p>
+                    <ul class="text-left space-y-2 mb-6">
+                        <li class="editable" onclick="makeEditable(this)">✓ Todos los sabores</li>
+                        <li class="editable" onclick="makeEditable(this)">✓ Diferentes tamaños</li>
+                        <li class="editable" onclick="makeEditable(this)">✓ Decoración incluida</li>
+                        <li class="editable" onclick="makeEditable(this)">✓ Consulta directa</li>
+                    </ul>
+                    <button onclick="orderWholeCake()" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-full font-semibold transition-all">
+                        Consultar Precio
+                    </button>
+                </div>
+                
+                <!-- Pedidos Especiales -->
+                <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 text-center">
+                    <div class="text-5xl mb-4">🎨</div>
+                    <h3 class="font-dancing text-3xl font-bold mb-4 editable" onclick="makeEditable(this)">Pedidos Especiales</h3>
+                    <div class="text-2xl font-bold mb-4 text-amber-200 editable" onclick="makeEditable(this)">Cotización</div>
+                    <p class="mb-6 editable" onclick="makeEditable(this)">Para ocasiones especiales</p>
+                    <ul class="text-left space-y-2 mb-6">
+                        <li class="editable" onclick="makeEditable(this)">✓ Diseños personalizados</li>
+                        <li class="editable" onclick="makeEditable(this)">✓ Bodas y eventos</li>
+                        <li class="editable" onclick="makeEditable(this)">✓ Temáticos</li>
+                        <li class="editable" onclick="makeEditable(this)">✓ Múltiples pisos</li>
+                    </ul>
+                    <button onclick="orderSpecial()" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-full font-semibold transition-all">
+                        Solicitar Cotización
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="py-20 bg-gradient-to-br from-amber-50 to-orange-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-dancing text-5xl font-bold text-amber-900 mb-4 editable" onclick="makeEditable(this)">Contáctanos</h2>
+                <p class="text-xl text-amber-700 max-w-2xl mx-auto editable" onclick="makeEditable(this)">Estamos aquí para endulzar tu día</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="space-y-8">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-amber-500 text-white p-3 rounded-full">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-amber-900">WhatsApp</h3>
+                                <p class="text-amber-700 editable" onclick="makeEditable(this)">+58 412-987-3846</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-amber-500 text-white p-3 rounded-full">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-amber-900">Ubicación</h3>
+                                <p class="text-amber-700 editable" onclick="makeEditable(this)">Venezuela</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-amber-500 text-white p-3 rounded-full">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-amber-900">Horarios</h3>
+                                <p class="text-amber-700 editable" onclick="makeEditable(this)">Lun - Dom: 8:00 AM - 8:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cake-card rounded-2xl p-8">
+                        <h3 class="font-dancing text-3xl font-bold text-amber-900 mb-6 text-center editable" onclick="makeEditable(this)">¡Haz tu Pedido!</h3>
+                        <div class="space-y-4">
+                            <button onclick="openWhatsApp('Hola! Me gustaría hacer un pedido de pasteles 🍰')" class="w-full bg-green-500 hover:bg-green-600 text-white py-4 px-6 rounded-full font-semibold text-lg transition-all flex items-center justify-center space-x-2">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                                </svg>
+                                <span>Contactar por WhatsApp</span>
+                            </button>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <button onclick="orderPortion()" class="btn-chocolate text-white py-3 px-4 rounded-full font-semibold">
+                                    Pedir Ración
+                                </button>
+                                <button onclick="orderWholeCake()" class="btn-chocolate text-white py-3 px-4 rounded-full font-semibold">
+                                    Pastel Completo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="chocolate-drip text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-3 mb-4">
+                    <div class="text-4xl">🍰</div>
+                    <h3 class="font-dancing text-3xl font-bold editable" onclick="makeEditable(this)">Lalito Cake</h3>
+                </div>
+                <p class="text-amber-200 mb-6 editable" onclick="makeEditable(this)">Endulzando momentos especiales desde el corazón</p>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <button onclick="openWhatsApp('Hola! Me gustaría conocer más sobre Lalito Cake 🍰')" class="text-amber-200 hover:text-white transition-colors" title="WhatsApp">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                        </svg>
+                    </button>
+                    <button onclick="openInstagram()" class="text-amber-200 hover:text-white transition-colors" title="Instagram">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </button>
+                    <button onclick="openFacebook()" class="text-amber-200 hover:text-white transition-colors" title="Facebook">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </button>
+                    <button onclick="openTikTok()" class="text-amber-200 hover:text-white transition-colors" title="TikTok">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="text-center">
+                    <p class="text-amber-200 text-sm editable" onclick="makeEditable(this)">Síguenos en nuestras redes sociales</p>
+                </div>
+                <p class="text-amber-200 text-sm mt-6 editable" onclick="makeEditable(this)">&copy; 2024 Lalito Cake. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón Chat Flotante -->
+    <div class="floating-chat">
+        <button onclick="toggleChatWidget()" class="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl transition-all">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Botón Admin (oculto) -->
+    <div class="fixed bottom-4 left-4 z-50">
+        <button onclick="showAdminModal()" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.1'" class="bg-gray-800 text-white p-2 rounded-full text-xs opacity-10 transition-all">
+            ⚙️
+        </button>
+    </div>
+
+    <!-- Modal de Admin -->
+    <div id="adminModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-2xl p-8 max-w-md w-full">
+                <h3 class="font-dancing text-3xl font-bold text-amber-900 mb-6 text-center">Acceso Administrador</h3>
+                <input type="password" id="adminPassword" placeholder="Contraseña" class="w-full p-3 border border-amber-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                <div class="flex space-x-4">
+                    <button onclick="checkAdminPassword()" class="flex-1 btn-chocolate text-white py-3 rounded-lg font-semibold">Acceder</button>
+                    <button onclick="closeAdminModal()" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-lg font-semibold">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel de Admin -->
+    <div id="adminPanel" class="fixed top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-30 backdrop-blur-sm rounded-2xl p-3 z-40 hidden">
+        <div class="flex flex-col space-y-3">
+            <!-- Botón Subir Imágenes -->
+            <div class="relative group">
+                <button onclick="enableImageUpload()" class="w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center">
+                    📷
+                </button>
+                <div class="absolute right-14 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    Subir Imágenes
+                    <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
+                </div>
+            </div>
+            
+            <!-- Botón Editar Contenido -->
+            <div class="relative group">
+                <button onclick="editContent()" class="w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center">
+                    ✏️
+                </button>
+                <div class="absolute right-14 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    Editar Contenido
+                    <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
+                </div>
+            </div>
+            
+            <!-- Botón Resetear Imágenes -->
+            <div class="relative group">
+                <button onclick="resetImages()" class="w-12 h-12 bg-red-500 hover:bg-red-600 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center">
+                    🔄
+                </button>
+                <div class="absolute right-14 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    Resetear Imágenes
+                    <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
+                </div>
+            </div>
+            
+            <!-- Separador -->
+            <div class="w-8 h-px bg-white bg-opacity-30 mx-auto"></div>
+            
+            <!-- Botón Salir del Admin -->
+            <div class="relative group">
+                <button onclick="toggleAdminMode()" class="w-12 h-12 bg-gray-600 hover:bg-gray-700 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center">
+                    🚪
+                </button>
+                <div class="absolute right-14 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    Salir del Admin
+                    <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Widget -->
+    <div id="chatWidget" class="fixed bottom-20 right-4 w-80 bg-white rounded-2xl shadow-2xl z-50 hidden">
+        <div class="bg-green-500 text-white p-4 rounded-t-2xl flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="text-2xl">🍰</div>
+                <div>
+                    <h4 class="font-bold">Lalito Cake</h4>
+                    <p class="text-xs opacity-90">En línea</p>
+                </div>
+            </div>
+            <button onclick="toggleChatWidget()" class="text-white hover:text-gray-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="p-4 max-h-96 overflow-y-auto" id="chatMessages">
+            <div class="bg-gray-100 rounded-lg p-3 mb-3">
+                <p class="text-sm">¡Hola! 👋 Soy el asistente de Lalito Cake. ¿En qué puedo ayudarte hoy?</p>
+            </div>
+        </div>
+        
+        <div class="p-4 border-t">
+            <div class="space-y-2 mb-4" id="quickQuestions">
+                <button onclick="selectQuestion('¿Qué sabores tienen disponibles?')" class="w-full text-left bg-gray-100 hover:bg-gray-200 p-2 rounded-lg text-sm transition-colors">¿Qué sabores tienen disponibles?</button>
+                <button onclick="selectQuestion('¿Cuánto cuesta una ración?')" class="w-full text-left bg-gray-100 hover:bg-gray-200 p-2 rounded-lg text-sm transition-colors">¿Cuánto cuesta una ración?</button>
+                <button onclick="selectQuestion('¿Hacen pasteles completos?')" class="w-full text-left bg-gray-100 hover:bg-gray-200 p-2 rounded-lg text-sm transition-colors">¿Hacen pasteles completos?</button>
+                <button onclick="selectQuestion('¿Realizan pedidos especiales?')" class="w-full text-left bg-gray-100 hover:bg-gray-200 p-2 rounded-lg text-sm transition-colors">¿Realizan pedidos especiales?</button>
+                <button onclick="selectQuestion('¿Cuál es el tiempo de entrega?')" class="w-full text-left bg-gray-100 hover:bg-gray-200 p-2 rounded-lg text-sm transition-colors">¿Cuál es el tiempo de entrega?</button>
+            </div>
+            
+            <div class="flex space-x-2">
+                <input type="text" id="chatInput" placeholder="Escribe tu mensaje..." class="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-sm">
+                <button onclick="sendMessage()" class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mt-3">
+                <input type="text" id="userName" placeholder="Tu nombre (opcional)" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-sm mb-2">
+                <input type="tel" id="userPhone" placeholder="Tu teléfono (opcional)" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-sm">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables del carrusel
+        let currentSlide = 0;
+        const totalSlides = 3;
+        let isAdminMode = false;
+        let chatMessages = [];
+        
+        // Función para ir al siguiente slide
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+        
+        // Función para ir al slide anterior
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+        
+        // Función para ir a un slide específico
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateCarousel();
+        }
+        
+        // Función para actualizar el carrusel
+        function updateCarousel() {
+            const track = document.getElementById('carouselTrack');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Actualizar indicadores
+            indicators.forEach((indicator, index) => {
+                if (index === currentSlide) {
+                    indicator.classList.add('bg-opacity-100');
+                    indicator.classList.remove('bg-opacity-50');
+                } else {
+                    indicator.classList.add('bg-opacity-50');
+                    indicator.classList.remove('bg-opacity-100');
+                }
+            });
+        }
+        
+        // Auto-play del carrusel
+        setInterval(nextSlide, 5000);
+        
+        // Funciones de Admin
+        function showAdminModal() {
+            document.getElementById('adminModal').classList.remove('hidden');
+        }
+        
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.add('hidden');
+            document.getElementById('adminPassword').value = '';
+        }
+        
+        function checkAdminPassword() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === 'lalito2024') {
+                isAdminMode = true;
+                closeAdminModal();
+                document.getElementById('adminPanel').classList.remove('hidden');
+                enableImageUpload();
+                showSaveNotification('¡Modo administrador activado!');
+            } else {
+                alert('Contraseña incorrecta');
+            }
+        }
+        
+        function toggleAdminMode() {
+            isAdminMode = false;
+            document.getElementById('adminPanel').classList.add('hidden');
+            // Ocultar todos los botones de upload
+            document.querySelectorAll('.upload-btn').forEach(btn => {
+                btn.classList.add('hidden');
+            });
+            // Desactivar modo edición
+            document.querySelectorAll('.editable').forEach(element => {
+                element.classList.remove('editing-enabled');
+                element.style.outline = 'none';
+                element.style.cursor = 'default';
+            });
+            showSaveNotification('Modo administrador desactivado');
+        }
+        
+        function enableImageUpload() {
+            if (isAdminMode) {
+                document.querySelectorAll('.upload-btn').forEach(btn => {
+                    btn.classList.remove('hidden');
+                });
+            }
+        }
+        
+        function editContent() {
+            if (isAdminMode) {
+                toggleEditMode();
+            }
+        }
+        
+        function toggleEditMode() {
+            const editableElements = document.querySelectorAll('.editable');
+            const isCurrentlyEditing = document.querySelector('.editing-enabled');
+            
+            if (isCurrentlyEditing) {
+                // Desactivar modo edición
+                editableElements.forEach(element => {
+                    element.classList.remove('editing-enabled');
+                    element.style.outline = 'none';
+                    element.style.cursor = 'default';
+                });
+                showSaveNotification('Modo edición desactivado');
+            } else {
+                // Activar modo edición
+                editableElements.forEach(element => {
+                    element.classList.add('editing-enabled');
+                    element.style.outline = '2px dashed #3B82F6';
+                    element.style.cursor = 'pointer';
+                });
+                showSaveNotification('Modo edición activado - Haz clic en cualquier texto para editarlo');
+            }
+        }
+        
+        function makeEditable(element) {
+            if (!isAdminMode || !element.classList.contains('editing-enabled')) return;
+            
+            const originalText = element.textContent;
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = originalText;
+            input.className = 'w-full p-2 border-2 border-blue-500 rounded bg-white text-black';
+            input.style.fontSize = window.getComputedStyle(element).fontSize;
+            input.style.fontWeight = window.getComputedStyle(element).fontWeight;
+            input.style.textAlign = window.getComputedStyle(element).textAlign;
+            
+            element.innerHTML = '';
+            element.appendChild(input);
+            input.focus();
+            input.select();
+            
+            function saveEdit() {
+                const newText = input.value.trim();
+                if (newText && newText !== originalText) {
+                    element.textContent = newText;
+                    showSaveNotification('Contenido actualizado: ' + newText.substring(0, 30) + '...');
+                } else {
+                    element.textContent = originalText;
+                }
+                element.style.outline = '2px dashed #3B82F6';
+            }
+            
+            input.addEventListener('blur', saveEdit);
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    input.blur();
+                }
+                if (e.key === 'Escape') {
+                    element.textContent = originalText;
+                    element.style.outline = '2px dashed #3B82F6';
+                }
+            });
+        }
+        
+        function showSaveNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 max-w-sm';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        
+        function resetImages() {
+            if (isAdminMode && confirm('¿Estás seguro de resetear todas las imágenes?')) {
+                // Resetear imágenes de tarjetas
+                const flavors = ['oreo', 'nutella', '3leches', 'napolitana', 'chocoflan', 'pina', 'arequipe'];
+                const emojis = ['🍪', '🍫', '🥛', '🍓', '🍮', '🍍', '🍯'];
+                
+                flavors.forEach((flavor, index) => {
+                    const imageElement = document.getElementById(`${flavor}-image`);
+                    if (imageElement) {
+                        imageElement.innerHTML = emojis[index];
+                        imageElement.style.backgroundImage = '';
+                    }
+                });
+                
+                // Resetear slides del carrusel
+                document.getElementById('slide-1').style.backgroundImage = '';
+                document.getElementById('slide-1').classList.add('hero-gradient');
+                
+                showSaveNotification('Imágenes reseteadas correctamente');
+            }
+        }
+        
+        // Funciones de subida de imágenes
+        function triggerUpload(flavor) {
+            if (isAdminMode) {
+                document.getElementById(`upload-${flavor}`).click();
+            }
+        }
+        
+        function triggerCarouselUpload(slideId) {
+            if (isAdminMode) {
+                const slideNumber = slideId.split('-')[1];
+                document.getElementById(`upload-slide${slideNumber}`).click();
+            }
+        }
+        
+        function uploadImage(flavor, input) {
+            if (!isAdminMode) return;
+            
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageElement = document.getElementById(`${flavor}-image`);
+                    imageElement.style.backgroundImage = `url(${e.target.result})`;
+                    imageElement.style.backgroundSize = 'cover';
+                    imageElement.style.backgroundPosition = 'center';
+                    imageElement.style.width = '120px';
+                    imageElement.style.height = '120px';
+                    imageElement.style.borderRadius = '15px';
+                    imageElement.style.margin = '0 auto';
+                    imageElement.style.display = 'block';
+                    imageElement.innerHTML = '';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        function uploadCarouselImage(slideId, input) {
+            if (!isAdminMode) return;
+            
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const slideElement = document.getElementById(slideId);
+                    slideElement.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${e.target.result})`;
+                    slideElement.style.backgroundSize = 'cover';
+                    slideElement.style.backgroundPosition = 'center';
+                    slideElement.classList.remove('hero-gradient');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        // Funciones del Chat Widget
+        function toggleChatWidget() {
+            const widget = document.getElementById('chatWidget');
+            widget.classList.toggle('hidden');
+        }
+        
+        function selectQuestion(question) {
+            document.getElementById('chatInput').value = question;
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const userName = document.getElementById('userName').value || 'Cliente';
+            const userPhone = document.getElementById('userPhone').value;
+            const message = input.value.trim();
+            
+            if (message) {
+                // Agregar mensaje del usuario al chat
+                addMessageToChat(message, 'user');
+                
+                // Preparar mensaje para WhatsApp
+                let whatsappMessage = `*${userName}* escribió: ${message}`;
+                if (userPhone) {
+                    whatsappMessage += `\n📱 Teléfono: ${userPhone}`;
+                }
+                
+                // Limpiar input
+                input.value = '';
+                
+                // Simular respuesta automática
+                setTimeout(() => {
+                    addMessageToChat('¡Gracias por tu mensaje! Te redirigiremos a WhatsApp para continuar la conversación.', 'bot');
+                    
+                    // Redirigir a WhatsApp después de 2 segundos
+                    setTimeout(() => {
+                        openWhatsApp(whatsappMessage);
+                    }, 2000);
+                }, 1000);
+            }
+        }
+        
+        function addMessageToChat(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = sender === 'user' ? 'bg-green-100 rounded-lg p-3 mb-3 ml-8' : 'bg-gray-100 rounded-lg p-3 mb-3 mr-8';
+            messageDiv.innerHTML = `<p class="text-sm">${message}</p>`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Función para abrir WhatsApp
+        function openWhatsApp(message) {
+            const phoneNumber = '584129873846';
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            window.open(whatsappURL, '_blank');
+        }
+        
+        // Funciones para redes sociales
+        function openInstagram() {
+            // Cambiar por el usuario real de Instagram
+            window.open('https://instagram.com/lalitocake', '_blank');
+        }
+        
+        function openFacebook() {
+            // Cambiar por la página real de Facebook
+            window.open('https://facebook.com/lalitocake', '_blank');
+        }
+        
+        function openTikTok() {
+            // Cambiar por el usuario real de TikTok
+            window.open('https://tiktok.com/@lalitocake', '_blank');
+        }
+        
+        // Función para pedir un sabor específico
+        function orderFlavor(flavor) {
+            const message = `¡Hola! Me gustaría pedir un pastel de ${flavor}. ¿Podrían darme más información sobre precios y disponibilidad? 🍰`;
+            openWhatsApp(message);
+        }
+        
+        // Función para pedir una ración
+        function orderPortion() {
+            const message = `¡Hola! Me interesa pedir raciones individuales ($5 c/u). ¿Qué sabores tienen disponibles hoy? 🍰`;
+            openWhatsApp(message);
+        }
+        
+        // Función para pedir pastel completo
+        function orderWholeCake() {
+            const message = `¡Hola! Me gustaría consultar el precio de un pastel completo. ¿Podrían darme información sobre tamaños y precios según el peso? 🎂`;
+            openWhatsApp(message);
+        }
+        
+        // Función para pedidos especiales
+        function orderSpecial() {
+            const message = `¡Hola! Me interesa hacer un pedido especial para una ocasión especial. ¿Podrían ayudarme con el diseño y cotización? ✨🎂`;
+            openWhatsApp(message);
+        }
+        
+        // Función para scroll suave
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        // Navegación suave para los enlaces del header
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Event listener para Enter en el chat
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // Event listener para Enter en el password de admin
+        document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAdminPassword();
+            }
+        });
+        
+        // Inicializar carrusel
+        updateCarousel();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9775f85156417ea1',t:'MTc1NjU3NDU0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
