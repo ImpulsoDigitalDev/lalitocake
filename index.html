@@ -470,7 +470,7 @@
                 <div class="text-center">
                     <p class="text-amber-200 text-sm editable" onclick="makeEditable(this)">Síguenos en nuestras redes sociales</p>
                 </div>
-                <p class="text-amber-200 text-sm mt-6 editable" onclick="makeEditable(this)">&copy; 2025 Lalito Cake. Designed by: LEONOVA STUDIO</p>
+                <p class="text-amber-200 text-sm mt-6 editable" onclick="makeEditable(this)">&copy; 2024 Lalito Cake. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
@@ -526,6 +526,17 @@
                 </button>
                 <div class="absolute right-14 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                     Editar Contenido
+                    <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
+                </div>
+            </div>
+            
+            <!-- Botón Mostrar Imágenes -->
+            <div class="relative group">
+                <button onclick="showAvailableImages()" class="w-12 h-12 bg-purple-500 hover:bg-purple-600 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center">
+                    📋
+                </button>
+                <div class="absolute right-14 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    Ver Imágenes Disponibles
                     <div class="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
                 </div>
             </div>
@@ -612,48 +623,79 @@
         let isAdminMode = false;
         let chatMessages = [];
         
-        // Sistema de imágenes permanentes
+        // Sistema de imágenes permanentes - Auto-detecta imágenes disponibles
         const imageDatabase = {
-            // Imágenes de sabores (coloca aquí las URLs de tus imágenes reales)
+            // Imágenes de sabores
             flavors: {
-                oreo: [
-                    '🍪', // Emoji por defecto
-                    'images/oreo.jpg',
-                ],
-                nutella: [
-                    '🍫',
-                    'images/nutella.jpg',
-                ],
-                '3leches': [
-                    '🥛',
-                    'images/3leche.jpg',
-                ],
-                napolitana: [
-                    '🍓',
-                    'images/napolitana.jpg',
-                ],
-                chocoflan: [
-                    '🍮',
-                    'images/chocoflan.jpg',
-                ],
-                pina: [
-                    '🍍',
-                    'images/pina.jpg',
-                ],
-                arequipe: [
-                    '🍯',
-                    'images/arequipe.jpg',
-                ]
+                oreo: ['🍪'],
+                nutella: ['🍫'],
+                '3leches': ['🥛'],
+                napolitana: ['🍓'],
+                chocoflan: ['🍮'],
+                pina: ['🍍'],
+                arequipe: ['🍯']
             },
             // Imágenes del carrusel
-            carousel: [
-                'hero-gradient', // Gradiente por defecto
-                'images/carousel-slide1.jpg',
-                'images/carousel-slide2.jpg',
-                'images/carousel-slide3.jpg',
-                'images/carousel-slide4.jpg'
-                ]
-            };
+            carousel: ['hero-gradient']
+        };
+        
+        // Auto-detectar imágenes disponibles en el servidor
+        async function detectAvailableImages() {
+            const flavors = Object.keys(imageDatabase.flavors);
+            
+            // Detectar imágenes de sabores
+            for (const flavor of flavors) {
+                for (let i = 1; i <= 5; i++) {
+                    const imagePath = `images/${flavor}-cake${i}.jpg`;
+                    if (await imageExists(imagePath)) {
+                        imageDatabase.flavors[flavor].push(imagePath);
+                    }
+                    // También probar con .png
+                    const imagePngPath = `images/${flavor}-cake${i}.png`;
+                    if (await imageExists(imagePngPath)) {
+                        imageDatabase.flavors[flavor].push(imagePngPath);
+                    }
+                }
+            }
+            
+            // Detectar imágenes del carrusel
+            for (let i = 1; i <= 10; i++) {
+                const imagePath = `images/carousel-slide${i}.jpg`;
+                if (await imageExists(imagePath)) {
+                    imageDatabase.carousel.push(imagePath);
+                }
+                // También probar con .png
+                const imagePngPath = `images/carousel-slide${i}.png`;
+                if (await imageExists(imagePngPath)) {
+                    imageDatabase.carousel.push(imagePngPath);
+                }
+            }
+            
+            // También detectar imágenes con nombres alternativos
+            const alternativeNames = ['hero1', 'hero2', 'hero3', 'banner1', 'banner2', 'banner3'];
+            for (const name of alternativeNames) {
+                const imagePath = `images/${name}.jpg`;
+                if (await imageExists(imagePath)) {
+                    imageDatabase.carousel.push(imagePath);
+                }
+                const imagePngPath = `images/${name}.png`;
+                if (await imageExists(imagePngPath)) {
+                    imageDatabase.carousel.push(imagePngPath);
+                }
+            }
+            
+            console.log('Imágenes detectadas:', imageDatabase);
+        }
+        
+        // Función para verificar si una imagen existe
+        function imageExists(imagePath) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => resolve(true);
+                img.onerror = () => resolve(false);
+                img.src = imagePath;
+            });
+        }
         
         // Índices actuales de imágenes (se guardan en localStorage)
         let currentImageIndexes = JSON.parse(localStorage.getItem('lalitoCakeImages')) || {
@@ -812,7 +854,7 @@
         
         function checkAdminPassword() {
             const password = document.getElementById('adminPassword').value;
-            if (password === 'choroco') {
+            if (password === 'lalito2024') {
                 isAdminMode = true;
                 closeAdminModal();
                 document.getElementById('adminPanel').classList.remove('hidden');
@@ -925,6 +967,52 @@
             setTimeout(() => {
                 notification.remove();
             }, 3000);
+        }
+        
+        function showAvailableImages() {
+            if (!isAdminMode) return;
+            
+            let report = '📋 IMÁGENES DETECTADAS EN EL SERVIDOR:\n\n';
+            
+            // Mostrar imágenes de sabores
+            report += '🍰 SABORES:\n';
+            Object.keys(imageDatabase.flavors).forEach(flavor => {
+                const images = imageDatabase.flavors[flavor];
+                const realImages = images.slice(1); // Excluir emoji
+                if (realImages.length > 0) {
+                    report += `  • ${flavor}: ${realImages.length} imagen(es)\n`;
+                    realImages.forEach((img, index) => {
+                        report += `    - ${img}\n`;
+                    });
+                } else {
+                    report += `  • ${flavor}: Solo emoji (sin imágenes)\n`;
+                }
+            });
+            
+            // Mostrar imágenes del carrusel
+            report += '\n🎠 CARRUSEL:\n';
+            const carouselImages = imageDatabase.carousel.slice(1); // Excluir gradiente
+            if (carouselImages.length > 0) {
+                report += `  • ${carouselImages.length} imagen(es) disponibles:\n`;
+                carouselImages.forEach((img, index) => {
+                    report += `    - ${img}\n`;
+                });
+            } else {
+                report += '  • Solo gradiente (sin imágenes)\n';
+            }
+            
+            // Mostrar total
+            const totalImages = Object.values(imageDatabase.flavors).reduce((acc, arr) => acc + arr.length - 1, 0) + 
+                               imageDatabase.carousel.length - 1;
+            report += `\n📊 TOTAL: ${totalImages} imágenes detectadas`;
+            
+            if (totalImages === 0) {
+                report += '\n\n💡 SUGERENCIA: Asegúrate de que las imágenes estén en la carpeta "images/" con nombres como:\n';
+                report += '  • oreo-cake1.jpg, oreo-cake2.jpg, etc.\n';
+                report += '  • carousel-slide1.jpg, carousel-slide2.jpg, etc.';
+            }
+            
+            alert(report);
         }
         
         function resetImages() {
@@ -1075,10 +1163,31 @@
             }
         });
         
-        // Inicializar carrusel y cargar imágenes guardadas
-        updateCarousel();
-        loadSavedImages();
+        // Inicializar sistema
+        async function initializeSystem() {
+            // Detectar imágenes disponibles
+            await detectAvailableImages();
+            
+            // Cargar imágenes guardadas
+            loadSavedImages();
+            
+            // Inicializar carrusel
+            updateCarousel();
+            
+            // Si hay imágenes disponibles, mostrar notificación
+            const totalImages = Object.values(imageDatabase.flavors).reduce((acc, arr) => acc + arr.length - 1, 0) + 
+                               imageDatabase.carousel.length - 1;
+            
+            if (totalImages > 0) {
+                console.log(`✅ Sistema iniciado: ${totalImages} imágenes detectadas en el servidor`);
+            }
+        }
+        
+        // Inicializar cuando la página esté lista
+        document.addEventListener('DOMContentLoaded', initializeSystem);
+        
+        // También inicializar inmediatamente por si acaso
+        initializeSystem();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9776ce8e37a08f56',t:'MTc1NjU4MzMxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97771b6ec4c4a50f',t:'MTc1NjU4NjQ2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
